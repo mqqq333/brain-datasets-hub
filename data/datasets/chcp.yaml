@@ -1,0 +1,270 @@
+schema_version: "0.1"
+id: chcp
+name:
+  zh: "中国人脑连接组计划（CHCP）"
+  en: "Chinese Human Connectome Project (CHCP)"
+  aliases:
+    - "CHCP"
+    - "ChineseHCP"
+    - "中国人类连接组计划"
+summary:
+  zh: "CHCP 是 2017 年由北京大学高家红教授团队启动的中国人群多模态脑影像队列，采集规程式与美国 HCP 高度一致：3T Siemens Prisma，含 T1W/T2W 结构像、静息态与任务态 fMRI、高角度分辨率扩散 MRI，以及行为与认知测量。ScienceDB 官方数据集页给出 366 名健康中国汉族成年人，当前版本为 V4（2024-12-04 发布说明 / 2024-12-06 上线）。已发布未处理原始影像约 1.85 TB、经 HCP minimal preprocessing pipeline 处理的影像约 6.90 TB（zip），总量标注 8.74 TB，另附任务 EVs、刺激材料与受试者信息表。页面标注为 PUBLIC / Customized Agreement，并在正文展示《CHCP DATA USE AGREEMENT》（版本 2022-June-2）；ScienceDB 服务条款称基础服务免费、浏览无需注册，但官方未明确下载是否必须登录，也未给出全队列数值年龄范围。基因、生理、完整行为与部分任务时序数据据官方论文计划按季度处理后陆续发布，当前文件列表中未见基因数据文件。"
+  en: "CHCP is a Chinese-population multimodal neuroimaging cohort launched in 2017 by Prof. Jia-Hong Gao's team at Peking University, using HCP-style protocols on a 3T Siemens Prisma: T1W/T2W structural MRI, resting and task fMRI, high-angular-resolution diffusion MRI, plus behavioral and cognitive measures. The official Science Data Bank record states 366 healthy Chinese Han adults; the current release is V4 (release note dated 2024-12-04, posted online 2024-12-06). It provides about 1.85 TB of unprocessed images, about 6.90 TB of HCP minimally preprocessed images in zip files (8.74 TB total as stated on the page), and supplementary task EV, stimulus and subject-information files. The page is labelled PUBLIC / Customized Agreement and displays a CHCP Data Use Agreement (version 2022-June-2). ScienceDB terms say the basic service is free and browsing needs no registration, but the official pages do not state whether downloading requires login, nor give a numeric whole-cohort age range. Genetics, physiology, full behavioral data and task timing data are described in the official paper as planned for quarterly release after processing, quality control and privacy protection; no genetics files appear in the current file list."
+homepage: "https://www.scidb.cn/en/detail?dataSetId=f512d085f3d3452a9b14689e9997ca94"
+organization: "Science Data Bank（科学数据银行；页脚为 Computer Network Information Center, Chinese Academy of Sciences / 中国科学院计算机网络信息中心）为发布平台；数据由北京大学高家红团队产出，合作/署名单位包括北京理工大学、昌平实验室、北京脑科学与类脑研究中心、北京师范大学"
+species:
+  - "human"
+tags:
+  - "structural MRI"
+  - "fucntional MRI"
+  - "diffusion MRI"
+  - "Behaviors"
+modalities_overview:
+  - sMRI
+  - fMRI-rest
+  - fMRI-task
+  - dMRI
+  - behavior
+  - cognition
+citation:
+  doi: "10.11922/sciencedb.01374"
+  how_to_cite_url: "https://www.scidb.cn/en/detail?dataSetId=f512d085f3d3452a9b14689e9997ca94"
+  key_papers:
+    - title: "Increasing diversity in connectomics with the Chinese Human Connectome Project"
+      doi: "10.1038/s41593-022-01215-1"
+      url: "https://www.nature.com/articles/s41593-022-01215-1"
+cohort:
+  design: "unknown"
+  countries:
+    - "China"
+  population:
+    description_zh: "ScienceDB 数据集页的 CHCP Summary 写明“366 healthy adults (Chinese Han)”，扫描设备为 3T MR (Siemens Prisma)，机构为 Peking University, Beijing, China；项目由高家红教授于 2017 年启动，首个公开版本发布于 2022 年。V3 说明预处理影像覆盖“全部青年期参与者（young adulthood）以及部分中年与老年参与者（middle-aged and older adulthood）”，说明队列含多个年龄段，但官方页面未给出全队列的数值年龄上下限，也未给出各年龄段人数，故 age_range.min / max 记 unknown；仅见于二手综述的“18–80 岁”与论文检索摘要中的“18-37 岁”（某一匹配子样本）均未能由本次抓取的官方全文核实，不采用。队列按健康成人描述，未见按疾病入组。"
+    age_range:
+      min: "unknown"
+      max: "unknown"
+      unit: years
+    conditions:
+      - "健康成年人（中国汉族）"
+    healthy_controls: true
+  n_participants:
+    value: 366
+    definition_zh: "ScienceDB 官方数据集描述“CHCP Summary: Subjects: 366 healthy adults (Chinese Han)”给出的全队列健康成年人总数（OpenAPI /json 的 description 亦含同一句）。这是队列总人数，不是各影像子集的人数：V3 仅称预处理数据覆盖全部青年期参与者及部分中老年参与者，未给出子集计数。另有未经官方核实的博客片段称 365 人，不采用。as_of 为本次核实日期，官方未标注该计数的统计截止日。"
+    as_of: "2026-11-14"
+    source_refs:
+      - scidb-detail-en
+      - scidb-openapi-json
+      - scidb-detail-html
+releases:
+  - id: v1
+    name: "V1（首个公开发布）"
+    date: "2022-12-03"
+    notes_zh: "页面 History 记为“Version 1 published online 2022-12-03 05:50:04 GMT+8”，页头亦标注 Published on 2022-12-03；描述正文称首个公开版本在 2022 年，并设置 Embargoed until 2022-01-07。V1 描述说明未处理“raw”影像约 1.85 TB 已可下载，而全量预处理影像（最多约 70 TB）受当时云存储条件限制尚未上线，作者对学术请求提出可个案通过邮寄硬盘或第三方可信云存储提供（此说明仍保留在 V4 描述中，本次未核实当前是否仍适用）。"
+    subsets:
+      - id: v1-raw-unproc
+        name: "未处理原始影像（CHCP_ScienceDB_unpreproc / 文件列表中亦作 CHCP_ScienceDB_unproc）"
+        modalities:
+          - sMRI
+          - fMRI-rest
+          - fMRI-task
+          - dMRI
+        data_level: raw
+        n_participants: "unknown"
+        size: "约 1.85 TB"
+        protocol_url: "https://static-content.springer.com/esm/art%3A10.1038%2Fs41593-022-01215-1/MediaObjects/41593_2022_1215_MOESM1_ESM.pdf"
+        channels:
+          - scidb-download
+        notes_zh: "官方描述列出 T1W、T2W、rfMRI、tfMRI、dMRI；论文补充材料给出了 T1W/T2W、BOLD、自旋回波场图与 DWI 的扫描参数表以及 HCP 流水线预处理步骤（NIFTI/GIFTI/CIFTI 等）。文件组织方式与 HCP 未预处理数据一致（官方 GitHub README）。官方未给出该子集的人数与逐文件格式清单，故 n_participants 记 unknown、formats 省略。"
+      - id: v1-behavior-basic
+        name: "基本行为与人口学信息"
+        modalities:
+          - behavior
+          - cognition
+        data_level: summary
+        n_participants: "unknown"
+        channels:
+          - scidb-download
+        notes_zh: "依据 Nature Neuroscience 论文 Data availability：已公开数据包含“essential behavioral and demographic information data”；论文补充材料列出 NIH Toolbox 的认知、情绪、运动、感觉测量及 NEO-FFI、Raven、MMSE、匹兹堡睡眠问卷等其他量表。“full behavioral data”被列为后续按季度发布的内容，故此处仅记为已发布的基本信息，具体变量清单与人数官方未给出。"
+  - id: v2
+    name: "V2（任务 fMRI EVs 文件）"
+    date: "2023-01-16"
+    notes_zh: "描述正文“V2 Release (Date: January 16, 2023)”与页面 History“Version 2 updated online 2023-01-16 04:51:02 GMT+8”一致。"
+    subsets:
+      - id: v2-task-evs
+        name: "七大任务域 task fMRI EVs 文件"
+        modalities:
+          - fMRI-task
+        data_level: derivatives
+        n_participants: "unknown"
+        channels:
+          - scidb-download
+        notes_zh: "官方列出七个域：视觉/运动/躯体感觉与运动系统；类别特异性表征；工作记忆/认知控制；语言加工（语义与音韵）；社会认知（心理理论）；关系加工；情绪加工。数据集文件列表中另有 CHCP_task_EVs.docx（15.15 KB）与 CHCP_STIM.rar（1.43 MB），但官方未明确二者与 EVs 文件的对应关系，也未给出格式清单或人数，故 formats 省略、data_level 按任务事件/时序文件归为 derivatives 并在报告中标注为不确定项。"
+  - id: v3
+    name: "V3（HCP 最小预处理影像）"
+    date: "2024-01-12"
+    notes_zh: "描述正文“V3 Release (Date: January 12, 2024)”，页面 History 记为“Version 3 updated online 2024-01-22 13:02:19 GMT+8”，两者相差 10 天；本字段采用描述正文日期，差异在报告中说明。"
+    subsets:
+      - id: v3-preproc-minimal
+        name: "CHCP_ScienceDB_preproc（HCP minimal preprocessing pipeline 输出）"
+        modalities:
+          - sMRI
+          - fMRI-rest
+          - fMRI-task
+          - dMRI
+        data_level: preprocessed
+        n_participants: "unknown"
+        formats:
+          - "zip"
+        size: "约 6.90 TB（zip 文件）"
+        channels:
+          - scidb-download
+        notes_zh: "官方原文：“about 6.90 TB in zip files”；包含 T1W、T2W、rfMRI、tfMRI、dMRI 的预处理结果，覆盖全部青年期参与者以及部分中老年参与者；按 HCP 共享策略去掉了冗余预处理数据。官方未给出该子集人数，故记 unknown。论文补充材料说明 CHCP 使用 HCP pipelines v4.0.0（PreFreeSurfer/FreeSurfer/PostFreeSurfer、fMRIVolume/fMRISurface、ICA-FIX、Diffusion 等），并额外做全局信号回归、运动删失、0.01-0.08 Hz 带通滤波与平滑；输出含 NIFTI、GIFTI、CIFTI grayordinate 数据。"
+  - id: v4
+    name: "V4（当前版本：修复与再匿名化）"
+    date: "2024-12-04"
+    notes_zh: "描述正文“V4 Release (Date: December 4, 2024)”，页面 History 记为“Version 4 updated online 2024-12-06 01:32:47 GMT+8”，页头“Updated on 2024-12-06”；本字段采用描述正文日期。V4 修复了受试者 3011 预处理压缩文件损坏问题、删除受试者 3090 的错误预处理结果并更新了受试者文件信息列表；同时更新 CHCP_ScienceDB_unpreproc 文件夹（约 1.85 TB），修正 V1/V2 中部分老年参与者 T1W/T2W 去标识化不足的问题。页面 Information 标注 Data volume 8.74 TB、File counts 734；OpenAPI /json 与内嵌 JSON-LD 则给出 size 9604407598332 bytes（约 9.60 TB 十进制 / 8.74 TiB），即页面“8.74 TB”与字节数存在单位口径差异，二者均为官方数据，本记录原样保留、不做换算。"
+    subsets:
+      - id: v4-raw-anonymized
+        name: "更新后的未处理原始影像（约 1.85 TB）"
+        modalities:
+          - sMRI
+          - fMRI-rest
+          - fMRI-task
+          - dMRI
+        data_level: raw
+        n_participants: "unknown"
+        size: "约 1.85 TB"
+        channels:
+          - scidb-download
+        notes_zh: "V4 对 V1/V2 中部分老年参与者 T1W/T2W 匿名化不足进行了修正；官方未给出逐文件格式与人数。当前文件列表中的文件夹名写作 CHCP_ScienceDB_unproc，而描述正文写作 CHCP_ScienceDB_unpreproc（另见 CHCP_ScienceDB_preproc、V4、fcp-indi 等条目），名称不完全一致，按官方原文保留。页面还有“DataSet FTP ReadOnly Account”标签，但未说明该账号的申请或使用规则。"
+      - id: v4-subject-info
+        name: "受试者信息表与补充文件"
+        modalities:
+          - behavior
+          - cognition
+        data_level: summary
+        n_participants: "unknown"
+        formats:
+          - "xlsx"
+          - "docx"
+          - "rar"
+        channels:
+          - scidb-download
+        notes_zh: "V4 明确“updated the subject file information list”。文件列表可见 CHCP_subjects_information.xlsx（81.00 KB）、CHCP_task_EVs.docx（15.15 KB）、CHCP_STIM.rar（1.43 MB）；formats 按这些官方文件扩展名填写。官方未说明表格所含具体变量，也未给出人数，故 n_participants 记 unknown。"
+access_channels:
+  - id: scidb-download
+    name: "ScienceDB 数据集页面（PUBLIC 标注 + CHCP 数据使用协议）"
+    url: "https://www.scidb.cn/en/detail?dataSetId=f512d085f3d3452a9b14689e9997ca94"
+    platform: "Science Data Bank (ScienceDB)"
+    covers:
+      - v1-raw-unproc
+      - v1-behavior-basic
+      - v2-task-evs
+      - v3-preproc-minimal
+      - v4-raw-anonymized
+      - v4-subject-info
+    requirements:
+      registration: "unknown"
+      agreement:
+        type: DUA
+        signed_by: "unknown"
+        url: "https://www.scidb.cn/en/detail?dataSetId=f512d085f3d3452a9b14689e9997ca94"
+      ethics_approval: "unknown"
+      institutional_signoff: "unknown"
+      eligibility:
+        students_can_apply: "unknown"
+        commercial_use: "unknown"
+        notes_zh: "DUA 开头写明申请用途为“scientific investigation, teaching or the planning of clinical research studies”，第 7 条要求遵守所在机构及其机构审查委员会（IRB）的规则，但官方未说明是否必须提交伦理批件、是否需要机构签字、学生能否独立申请，也未明确商业用途条款，故相关字段记 unknown。ScienceDB 服务条款另写明：除数据集外，站点提供的其他服务仅可用于非商业目的；该条针对站点服务而非 CHCP 数据再利用，故不据此判定 commercial_use。"
+      source_refs:
+        - scidb-detail-en
+        - scidb-terms
+        - scidb-data-policy
+        - scidb-faq
+        - scidb-publishing-process
+      as_of: "2026-11-14"
+    cost:
+      model: free
+      compute_costs_zh: "官方未说明 CHCP 下载或分析是否产生计算/存储费用，故不填写。"
+      source_refs:
+        - scidb-terms
+        - scidb-openapi-json
+      as_of: "2026-11-14"
+    delivery:
+      local_download: "yes"
+      methods:
+        - web
+      cloud_platform: "ScienceDB"
+    restrictions_zh:
+      - "页面标注“PUBLIC Dataset Customized Agreement”，并在正文展示《CHINESE HUMAN CONNECTOME PROJECT (CHCP) DATA USE AGREEMENT》（Version: 2022-June-2）；ScienceDB 数据政策与 FAQ 列出 CC0、CC BY 4.0 等多种可选许可及 Restricted Access 模式，但 CHCP 页面本身并未标注 CC BY 4.0，故不声称采用任何 CC 许可。"
+      - "DUA 条款：接收的是去标识化数据，不得试图识别或联系 CHCP 受试者；不得就个别受试者结果直接联系各站点 PI 或工作人员；不得超出协议用途披露数据，且禁止以任何方式再分发；须要求团队内使用数据者同样遵守协议；须如实提供使用者与拟开展分析的信息，并及时响应年度更新请求；须遵守所在机构与 IRB 的规则；成果中须致谢 CHCP 并引用相关方法论文；违反条款将被终止数据访问权。"
+      - "ScienceDB 服务条款规定：可以浏览、下载和使用本站发布的数据（集），但再利用与再分发须遵守相应的数据许可；服务条款同时说明会记录浏览与下载时的 IP 地址用于地域分布统计。"
+      - "ScienceDB 官方元数据存在不一致：OpenAPI /json 返回 license 为空、conditionsOfAccess 为 unrestricted、isAccessibleForFree 为 true；页面内嵌 JSON-LD / Croissant 则为 license “Customized Agreement”、conditionsOfAccess “PUBLIC”。两者均为本次抓取的官方数据，本记录按页面可见的 Customized Agreement 与 DUA 处理，并在报告中披露该冲突。"
+      - "ScienceDB 服务条款与数据政策提到，涉及中国人类遗传资源的数据提交须遵守《中华人民共和国人类遗传资源管理条例》等法规；该要求针对数据提交方，CHCP 数据集页未对本数据集的下载提出人类遗传资源审批或数据出境要求，故不据此推断额外申请流程。"
+    china_notes_zh: "数据托管在国内平台 ScienceDB（中国科学院计算机网络信息中心），有中文界面，官方描述中说明 V1 时期全量预处理影像（最多约 70 TB）受云存储限制未上线，曾对学术请求提出邮寄硬盘或第三方可信云存储等个案方案；该说明仍保留在 V4 描述里，本次未核实其当前有效性。ScienceDB 服务条款写明基础服务目前对用户免费、浏览无需注册，但“某些服务”需要账号；发布流程文档中的 FTP 账号是分配给数据提交方用于上传、发布后即撤销，下载侧仅见“DataSet FTP ReadOnly Account”标签而无明确规则，因此本记录不判定下载是否必须登录。官方页面未提供国内下载速度、工具或镜像说明。"
+status: active
+status_note_zh: "当前版本 V4 于 2024-12-04（描述日期）/ 2024-12-06（上线时间）发布，数据集页、OpenAPI 与 DOI/CSTR 落地页本次均可访问；未发现官方宣布暂停或终止共享。官方论文 Data availability 说明：非影像数据（生理数据、tfMRI 起止时间与时长、完整行为数据、基因数据）计划在完成数据处理、质量控制与隐私保护后，通过 ScienceDB 与 CHCP 网站按季度发布；ScienceDB 概述亦写明 CHCP 采集了与 HCP 可类比的行为与基因数据。本次核实的 ScienceDB 文件列表中未见基因数据文件，也未找到独立的受控访问申请通道、申请时间表或签署人规定，故不把基因数据记为已发布，也不声称存在“需申请的受控子集”。论文、GitHub README 与 DUA 均引用项目网站 https://www.Chinese-HCP.cn，但本次抓取时 chinese-hcp.cn 与 www.chinese-hcp.cn 均 DNS 解析失败，站点内容未能核实。"
+sources:
+  - id: scidb-detail-en
+    title: "ScienceDB: Chinese Human Connectome Project dataset detail page (English, V4)"
+    url: "https://www.scidb.cn/en/detail?dataSetId=f512d085f3d3452a9b14689e9997ca94"
+    accessed: "2026-11-14"
+  - id: scidb-detail-html
+    title: "ScienceDB CHCP detail page raw HTML (embedded JSON-LD / Croissant metadata)"
+    url: "https://www.scidb.cn/detail?dataSetId=f512d085f3d3452a9b14689e9997ca94"
+    accessed: "2026-11-14"
+  - id: scidb-openapi-json
+    title: "ScienceDB OpenAPI dataset metadata by DOI (JSON-LD)"
+    url: "https://www.scidb.cn/api/sdb-openapi-service/json?doi=10.11922/sciencedb.01374"
+    accessed: "2026-11-14"
+  - id: scidb-doi
+    title: "CHCP dataset DOI landing page (10.11922/sciencedb.01374)"
+    url: "https://doi.org/10.11922/sciencedb.01374"
+    accessed: "2026-11-14"
+  - id: scidb-cstr
+    title: "CHCP dataset CSTR landing page (31253.11.sciencedb.01374)"
+    url: "https://cstr.cn/31253.11.sciencedb.01374"
+    accessed: "2026-11-14"
+  - id: scidb-terms
+    title: "ScienceDB Terms of Service"
+    url: "https://www.scidb.cn/en/terms"
+    accessed: "2026-11-14"
+  - id: scidb-data-policy
+    title: "ScienceDB Data Policy (license types, human research and human genetic resources rules)"
+    url: "https://www.scidb.cn/en/help?p=data_policy"
+    accessed: "2026-11-14"
+  - id: scidb-faq
+    title: "ScienceDB Help Center FAQ (licenses, restricted access, downloads)"
+    url: "https://www.scidb.cn/en/help?p=faq"
+    accessed: "2026-11-14"
+  - id: scidb-publishing-process
+    title: "ScienceDB Publishing Processes (registration, FTP upload account, free publishing)"
+    url: "https://www.scidb.cn/en/help?p=publishing_process"
+    accessed: "2026-11-14"
+  - id: nature-paper
+    title: "Ge et al., Increasing diversity in connectomics with the Chinese Human Connectome Project, Nature Neuroscience (2022) — Data availability / Code availability"
+    url: "https://www.nature.com/articles/s41593-022-01215-1"
+    accessed: "2026-11-14"
+  - id: nature-supplement
+    title: "Nature Neuroscience CHCP Supplementary Information (scanning parameters, preprocessing pipelines, behavioral measures)"
+    url: "https://static-content.springer.com/esm/art%3A10.1038%2Fs41593-022-01215-1/MediaObjects/41593_2022_1215_MOESM1_ESM.pdf"
+    accessed: "2026-11-14"
+  - id: pubmed
+    title: "PubMed record 36536245 for the CHCP Nature Neuroscience paper"
+    url: "https://pubmed.ncbi.nlm.nih.gov/36536245/"
+    accessed: "2026-11-14"
+  - id: chcp-github
+    title: "ChineseHCP/CHCP official code repository and README"
+    url: "https://github.com/ChineseHCP/CHCP"
+    accessed: "2026-11-14"
+  - id: pku-news
+    title: "Peking University news: first release of CHCP results and data resource (2023-01-18)"
+    url: "http://news.pku.edu.cn/info/2881/2731561.htm"
+    accessed: "2026-11-14"
+  - id: cpl-news
+    title: "Changping Laboratory news: CHCP Nature Neuroscience paper and data resource (2022-12-20)"
+    url: "https://www.cpl.ac.cn/scientific_research/research_news/4028c1f18604443d0186088076b00057.html"
+    accessed: "2026-11-14"
+verification:
+  last_verified: "2026-11-14"
+  verified_by: "claude-subagent"
+  review_due: "2027-05-14"
+  method: "official-docs"

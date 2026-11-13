@@ -1,0 +1,170 @@
+# 脑数据集记录模板 · schema v0.1
+# 用法：复制为 data/datasets/<id>.yaml（文件名必须等于 id + ".yaml"），
+#       按官方来源逐字段填写，然后运行 npm run validate。
+# 规则要点：
+#   1. 以 `_` 开头的文件（如本模板）会被校验器跳过。
+#   2. 对象不接受未列出的键（additionalProperties: false），拼错即报错。
+#   3. 允许写 "unknown" 的字段已注明；未知必须显式写 unknown，不要留空或猜测。
+#   4. 所有 date 均为 YYYY-MM-DD；release.date 可写 YYYY / YYYY-MM / YYYY-MM-DD。
+#   5. 引用完整性：subset.channels -> access_channels[].id；
+#      access_channels[].covers -> releases[].subsets[].id；
+#      任意层级的 source_refs -> sources[].id。
+#   6. 不需填写的可选字段请整行删除（不要留 key: 空值）。
+
+# ---- 必填：顶层 ----
+schema_version: "0.1"            # 固定值，必须加引号，否则 YAML 会读成数字
+id: example-cohort               # kebab-case：^[a-z0-9]+(-[a-z0-9]+)*$，须与文件名一致
+name:
+  zh: 示例队列                   # 必填
+  en: Example Cohort            # 必填
+  aliases: [EXC]                # 可选，字符串数组
+summary:
+  zh: 一句话说明这个数据集是什么、适合谁申请。   # 必填
+  en: One-sentence summary.     # 可选
+homepage: https://example.org/  # 必填，uri
+organization: Example Institute               # 可选
+species: [human]                              # 可选，默认按 ["human"] 理解，建议显式写出
+tags: [imaging, open-data]                    # 可选
+modalities_overview: [sMRI, fMRI-rest]        # 必填，≥1；可选值：
+#   sMRI, fMRI-rest, fMRI-task, dMRI, ASL, SWI, PET, EEG, MEG, iEEG, fNIRS,
+#   TMS, eye-tracking, behavior, cognition, clinical, phenotype, genetics,
+#   biospecimen, other
+
+citation:                        # 可选
+  doi: 10.1000/example
+  how_to_cite_url: https://example.org/cite   # uri
+  key_papers:
+    - title: The example cohort paper
+      doi: 10.1000/paper
+      url: https://example.org/paper
+
+# ---- 必填：队列 ----
+cohort:
+  design: longitudinal           # 可选：cross-sectional | longitudinal | mixed | unknown
+  countries: [United Kingdom]    # 可选
+  population:                    # 必填
+    description_zh: 一般人群与部分疾病亚组的描述。  # 必填
+    age_range:                   # 可选
+      min: 40                    # number 或 "unknown"
+      max: 69                    # number 或 "unknown"
+      unit: years                # years | months | weeks
+    conditions: [healthy, hypertension]   # 可选
+    healthy_controls: true       # boolean 或 "unknown"
+  n_participants:                # 必填
+    value: 500000                # integer 或 "unknown"（必填）
+    definition_zh: 基线完成影像扫描的受试者人数。  # 必填：说明"数的是什么"
+    as_of: 2026-01-31            # 可选，date
+    source_refs: [official-overview]      # 必填，≥1，均须出现在 sources[].id
+
+# ---- 必填：发布版本（≥1）----
+releases:
+  - id: r1                       # kebab-case
+    name: Release 1
+    date: "2024"                 # YYYY / YYYY-MM / YYYY-MM-DD（建议加引号）
+    notes_zh: 首批影像数据。
+    subsets:                     # 必填，≥1
+      - id: r1-imaging-raw       # kebab-case；同一文件内所有子集 id 必须唯一
+        name: Raw imaging
+        modalities: [sMRI, fMRI-rest]   # 必填，≥1，取值同 modalities_overview
+        data_level: raw          # raw | preprocessed | derivatives | summary | mixed
+        n_participants: 50000    # integer 或 "unknown"
+        formats: [DICOM, NIfTI]  # 可选
+        derivatives: [fMRIPrep]  # 可选
+        size: "~20 TB"           # 可选
+        protocol_url: https://example.org/protocol   # 可选，uri
+        channels: [apply-portal] # 必填，≥1，引用 access_channels[].id
+        notes_zh: 含原始与部分预处理数据。
+
+# ---- 必填：获取渠道（≥1）----
+access_channels:
+  - id: apply-portal             # kebab-case；同一文件内唯一
+    name: Official application portal
+    url: https://example.org/apply   # uri
+    platform: Example Data Portal
+    covers: [r1-imaging-raw]     # 必填，引用 releases[].subsets[].id
+    requirements:                # 必填
+      registration: true         # boolean 或 "unknown"
+      agreement:                 # 可选
+        type: DUA                # none | click-through | DUA | MTA | license | unknown
+        signed_by: institution   # none | self | PI | institution | unknown
+        url: https://example.org/dua
+      credentialing: [CITI]      # 可选
+      institutional_signoff: true   # boolean 或 "unknown"
+      ethics_approval: required    # required | not_required | depends | unknown
+      eligibility:                 # 可选
+        students_can_apply: via_supervisor  # yes | no | via_supervisor | unknown
+        commercial_use: separate_terms      # allowed | not_allowed | separate_terms | unknown
+        notes_zh: 商业用途需另行申请。
+      data_use_limitations:        # 可选
+        - code: DUO:0000006        # 必须是 ^DUO:\d{7}$（7 位数字）
+          label: health or medical or biomedical research
+      geographic_restrictions_zh: 暂无明确限制。
+      source_refs: [official-access]   # 必填，≥1，引用 sources[].id
+      as_of: 2026-11-01           # 必填，date
+    cost:                        # 必填
+      model: tiered              # free | fixed | tiered | unknown
+      tiers:                     # 可选
+        - name: Academic tier
+          amount: 3000           # number
+          currency: GBP          # ISO 4217 三位大写字母
+          period: per-project    # one-off | per-year | per-project | other
+          notes_zh: 按项目规模分档。
+      compute_costs_zh: 云端分析另计算力费用。
+      source_refs: [official-fees]     # 必填，≥1
+      as_of: 2026-11-01         # 必填，date
+    delivery:                    # 必填
+      local_download: partial   # yes | no | partial | unknown
+      cloud_platform: Example Cloud
+      methods: [web, cloud-workspace]  # 可选；可选值：
+      #   web, datalad, aws-s3, gcs, api, aspera, physical-media, cloud-workspace, other
+    process:                     # 可选
+      steps:
+        - order: 1
+          title_zh: 注册账号
+          detail_zh: 使用机构邮箱注册。
+        - order: 2
+          title_zh: 提交申请
+          detail_zh: 上传 DUA 与伦理批件。
+      official_timeline:
+        value: 15                # number
+        unit: weeks              # days | weeks | months
+        start_point_zh: 提交完整申请材料
+        end_point_zh: 收到数据访问批准
+        as_of: 2026-11-01       # date
+        source_refs: [official-faq]
+      validity:
+        duration_zh: 首次授权 1 年
+        renewal_zh: 到期前提交续期申请
+      source_refs: [official-faq]
+    restrictions_zh:             # 可选
+      - 不得尝试再识别受试者。
+    china_notes_zh: 涉及人类遗传资源与数据出境时，需另行合规评估。
+
+status: active                   # 必填：active | paused | deprecated | changing
+status_note_zh: 正常开放申请。    # 可选
+
+# ---- 必填：来源（≥1）----
+sources:                         # 每条 id 为 kebab-case，accessed 必填（date）
+  - id: official-overview
+    title: Official cohort overview
+    url: https://example.org/overview
+    accessed: 2026-11-01
+  - id: official-access
+    title: Access application guide
+    url: https://example.org/access
+    accessed: 2026-11-01
+  - id: official-fees
+    title: Access charges
+    url: https://example.org/fees
+    accessed: 2026-11-01
+  - id: official-faq
+    title: Application timeline FAQ
+    url: https://example.org/faq
+    accessed: 2026-11-01
+
+# ---- 必填：核实信息 ----
+verification:
+  last_verified: 2026-11-01      # 必填，date
+  verified_by: mqqq333           # 必填
+  review_due: 2027-02-01         # 必填，date；不得早于 last_verified
+  method: official-docs          # 必填：official-docs | application-experience | mixed

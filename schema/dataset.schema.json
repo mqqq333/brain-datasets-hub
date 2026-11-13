@@ -1,0 +1,457 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brain-datasets-hub.local/schema/dataset.schema.json",
+  "title": "Brain Datasets Hub dataset record (spec v0.1)",
+  "description": "Canonical definition for one dataset/cohort YAML file. Objects are closed (additionalProperties: false) so typos fail validation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "name",
+    "summary",
+    "homepage",
+    "modalities_overview",
+    "cohort",
+    "releases",
+    "access_channels",
+    "status",
+    "sources",
+    "verification"
+  ],
+  "$defs": {
+    "kebabId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "YYYY-MM-DD"
+    },
+    "releaseDate": {
+      "type": "string",
+      "pattern": "^[0-9]{4}(-(0[1-9]|1[0-2])(-(0[1-9]|[12][0-9]|3[01]))?)?$",
+      "description": "YYYY or YYYY-MM or YYYY-MM-DD"
+    },
+    "uri": {
+      "type": "string",
+      "format": "uri"
+    },
+    "integerOrUnknown": {
+      "anyOf": [
+        { "type": "integer" },
+        { "const": "unknown", "title": "integer or \"unknown\"" }
+      ]
+    },
+    "numberOrUnknown": {
+      "anyOf": [
+        { "type": "number" },
+        { "const": "unknown", "title": "number or \"unknown\"" }
+      ]
+    },
+    "booleanOrUnknown": {
+      "anyOf": [
+        { "type": "boolean" },
+        { "const": "unknown", "title": "boolean or \"unknown\"" }
+      ]
+    },
+    "stringArray": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "refArray": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "References to sources[].id"
+    },
+    "sourceRefs": {
+      "allOf": [
+        { "$ref": "#/$defs/refArray" }
+      ],
+      "minItems": 1
+    },
+    "modality": {
+      "enum": [
+        "sMRI",
+        "fMRI-rest",
+        "fMRI-task",
+        "dMRI",
+        "ASL",
+        "SWI",
+        "PET",
+        "EEG",
+        "MEG",
+        "iEEG",
+        "fNIRS",
+        "TMS",
+        "eye-tracking",
+        "behavior",
+        "cognition",
+        "clinical",
+        "phenotype",
+        "genetics",
+        "biospecimen",
+        "other"
+      ]
+    },
+    "name": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["zh", "en"],
+      "properties": {
+        "zh": { "type": "string" },
+        "en": { "type": "string" },
+        "aliases": { "$ref": "#/$defs/stringArray" }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["zh"],
+      "properties": {
+        "zh": { "type": "string" },
+        "en": { "type": "string" }
+      }
+    },
+    "citation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "doi": { "type": "string" },
+        "how_to_cite_url": { "$ref": "#/$defs/uri" },
+        "key_papers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "title": { "type": "string" },
+              "doi": { "type": "string" },
+              "url": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "cohort": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["population", "n_participants"],
+      "properties": {
+        "design": {
+          "enum": ["cross-sectional", "longitudinal", "mixed", "unknown"]
+        },
+        "countries": { "$ref": "#/$defs/stringArray" },
+        "population": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["description_zh"],
+          "properties": {
+            "description_zh": { "type": "string" },
+            "age_range": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "min": { "$ref": "#/$defs/numberOrUnknown" },
+                "max": { "$ref": "#/$defs/numberOrUnknown" },
+                "unit": { "enum": ["years", "months", "weeks"] }
+              }
+            },
+            "conditions": { "$ref": "#/$defs/stringArray" },
+            "healthy_controls": { "$ref": "#/$defs/booleanOrUnknown" }
+          }
+        },
+        "n_participants": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["value", "definition_zh", "source_refs"],
+          "properties": {
+            "value": { "$ref": "#/$defs/integerOrUnknown" },
+            "definition_zh": {
+              "type": "string",
+              "description": "What exactly is counted"
+            },
+            "as_of": { "$ref": "#/$defs/date" },
+            "source_refs": { "$ref": "#/$defs/sourceRefs" }
+          }
+        }
+      }
+    },
+    "release": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "subsets"],
+      "properties": {
+        "id": { "$ref": "#/$defs/kebabId" },
+        "name": { "type": "string" },
+        "date": { "$ref": "#/$defs/releaseDate" },
+        "notes_zh": { "type": "string" },
+        "subsets": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/subset" }
+        }
+      }
+    },
+    "subset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "modalities", "channels"],
+      "properties": {
+        "id": {
+          "allOf": [{ "$ref": "#/$defs/kebabId" }],
+          "description": "Kebab-case, unique across the whole file"
+        },
+        "name": { "type": "string" },
+        "modalities": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/modality" }
+        },
+        "data_level": {
+          "enum": ["raw", "preprocessed", "derivatives", "summary", "mixed"]
+        },
+        "n_participants": { "$ref": "#/$defs/integerOrUnknown" },
+        "formats": { "$ref": "#/$defs/stringArray" },
+        "derivatives": { "$ref": "#/$defs/stringArray" },
+        "size": { "type": "string" },
+        "protocol_url": { "$ref": "#/$defs/uri" },
+        "channels": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" },
+          "description": "References to access_channels[].id"
+        },
+        "notes_zh": { "type": "string" }
+      }
+    },
+    "accessChannel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "covers", "requirements", "cost", "delivery"],
+      "properties": {
+        "id": { "$ref": "#/$defs/kebabId" },
+        "name": { "type": "string" },
+        "url": { "$ref": "#/$defs/uri" },
+        "platform": { "type": "string" },
+        "covers": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "References to releases[].subsets[].id"
+        },
+        "requirements": { "$ref": "#/$defs/requirements" },
+        "cost": { "$ref": "#/$defs/cost" },
+        "delivery": { "$ref": "#/$defs/delivery" },
+        "process": { "$ref": "#/$defs/process" },
+        "restrictions_zh": { "$ref": "#/$defs/stringArray" },
+        "china_notes_zh": { "type": "string" }
+      }
+    },
+    "requirements": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_refs", "as_of"],
+      "properties": {
+        "registration": { "$ref": "#/$defs/booleanOrUnknown" },
+        "agreement": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "enum": ["none", "click-through", "DUA", "MTA", "license", "unknown"]
+            },
+            "signed_by": {
+              "enum": ["none", "self", "PI", "institution", "unknown"]
+            },
+            "url": { "$ref": "#/$defs/uri" }
+          }
+        },
+        "credentialing": { "$ref": "#/$defs/stringArray" },
+        "institutional_signoff": { "$ref": "#/$defs/booleanOrUnknown" },
+        "ethics_approval": {
+          "enum": ["required", "not_required", "depends", "unknown"]
+        },
+        "eligibility": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "students_can_apply": {
+              "enum": ["yes", "no", "via_supervisor", "unknown"]
+            },
+            "commercial_use": {
+              "enum": ["allowed", "not_allowed", "separate_terms", "unknown"]
+            },
+            "notes_zh": { "type": "string" }
+          }
+        },
+        "data_use_limitations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "code": { "type": "string", "pattern": "^DUO:[0-9]{7}$" },
+              "label": { "type": "string" }
+            }
+          }
+        },
+        "geographic_restrictions_zh": { "type": "string" },
+        "source_refs": { "$ref": "#/$defs/sourceRefs" },
+        "as_of": { "$ref": "#/$defs/date" }
+      }
+    },
+    "cost": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_refs", "as_of"],
+      "properties": {
+        "model": { "enum": ["free", "fixed", "tiered", "unknown"] },
+        "tiers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "name": { "type": "string" },
+              "amount": { "type": "number" },
+              "currency": { "type": "string", "pattern": "^[A-Z]{3}$" },
+              "period": {
+                "enum": ["one-off", "per-year", "per-project", "other"]
+              },
+              "notes_zh": { "type": "string" }
+            }
+          }
+        },
+        "compute_costs_zh": { "type": "string" },
+        "source_refs": { "$ref": "#/$defs/sourceRefs" },
+        "as_of": { "$ref": "#/$defs/date" }
+      }
+    },
+    "delivery": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "local_download": { "enum": ["yes", "no", "partial", "unknown"] },
+        "cloud_platform": { "type": "string" },
+        "methods": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "web",
+              "datalad",
+              "aws-s3",
+              "gcs",
+              "api",
+              "aspera",
+              "physical-media",
+              "cloud-workspace",
+              "other"
+            ]
+          }
+        }
+      }
+    },
+    "process": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "steps": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "order": { "type": "integer" },
+              "title_zh": { "type": "string" },
+              "detail_zh": { "type": "string" }
+            }
+          }
+        },
+        "official_timeline": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "value": { "type": "number" },
+            "unit": { "enum": ["days", "weeks", "months"] },
+            "start_point_zh": { "type": "string" },
+            "end_point_zh": { "type": "string" },
+            "as_of": { "$ref": "#/$defs/date" },
+            "source_refs": { "$ref": "#/$defs/refArray" }
+          }
+        },
+        "validity": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "duration_zh": { "type": "string" },
+            "renewal_zh": { "type": "string" }
+          }
+        },
+        "source_refs": { "$ref": "#/$defs/refArray" }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "accessed"],
+      "properties": {
+        "id": { "$ref": "#/$defs/kebabId" },
+        "title": { "type": "string" },
+        "url": { "$ref": "#/$defs/uri" },
+        "accessed": { "$ref": "#/$defs/date" }
+      }
+    }
+  },
+  "properties": {
+    "schema_version": { "const": "0.1" },
+    "id": { "$ref": "#/$defs/kebabId" },
+    "name": { "$ref": "#/$defs/name" },
+    "summary": { "$ref": "#/$defs/summary" },
+    "homepage": { "$ref": "#/$defs/uri" },
+    "organization": { "type": "string" },
+    "species": {
+      "allOf": [{ "$ref": "#/$defs/stringArray" }],
+      "default": ["human"],
+      "description": "Informational default; write it explicitly to be unambiguous"
+    },
+    "tags": { "$ref": "#/$defs/stringArray" },
+    "modalities_overview": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/modality" }
+    },
+    "citation": { "$ref": "#/$defs/citation" },
+    "cohort": { "$ref": "#/$defs/cohort" },
+    "releases": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/release" }
+    },
+    "access_channels": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/accessChannel" }
+    },
+    "status": { "enum": ["active", "paused", "deprecated", "changing"] },
+    "status_note_zh": { "type": "string" },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/source" }
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["last_verified", "verified_by", "review_due", "method"],
+      "properties": {
+        "last_verified": { "$ref": "#/$defs/date" },
+        "verified_by": { "type": "string" },
+        "review_due": { "$ref": "#/$defs/date" },
+        "method": {
+          "enum": ["official-docs", "application-experience", "mixed"]
+        }
+      }
+    }
+  }
+}

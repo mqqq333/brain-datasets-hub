@@ -1,0 +1,702 @@
+schema_version: "0.1"
+id: hcp-young-adult
+name:
+  zh: 人类连接组计划青年成人数据集
+  en: Human Connectome Project Young Adult (HCP-YA)
+  aliases:
+    - HCP-YA
+    - WU-Minn HCP
+    - 1200 Subjects Release
+    - S1200
+    - HCP-Young Adult 2025
+summary:
+  zh: >-
+    美国 WU-Minn HCP 联盟采集的约 1200 名健康青年成人（含双胞胎及其非双胞胎兄弟姐妹，
+    22–35 岁）多模态脑影像与行为数据。包含 3T 结构像（T1w/T2w）、静息态与任务态 fMRI、
+    弥散 MRI，另有 7T MRI 与 MEG 子样本；提供未处理数据、HCP 最小预处理数据及组平均/PTN
+    等衍生数据。开放数据注册后点选同意 Open Access Data Use Terms 即可下载；家庭结构、
+    精确年龄等敏感变量需另行申请 Restricted Access。自 2025-10-01 起原 ConnectomeDB
+    已下线，当前官方入口为 BALSA 的「ConnectomeDB powered by BALSA」，推荐版本为
+    HCP-Young Adult 2025（不应与 2017 年 S1200 版本混用）。2017 年 S1200 数据另可通过
+    AWS S3（BALSA 生成访问密钥）获取。
+  en: >-
+    Multimodal neuroimaging and behavioral data from ~1,200 healthy young adults
+    (twins and non-twin siblings, ages 22-35) collected by the WU-Minn HCP consortium:
+    3T structural (T1w/T2w), resting-state and task fMRI, diffusion MRI, plus 7T MRI
+    and MEG subsets. Data are distributed as unprocessed, HCP minimally preprocessed,
+    and group-average/PTN derivatives. Open data require registration and click-through
+    acceptance of the Open Access Data Use Terms; family structure and other sensitive
+    variables require a separate Restricted Access application. Since 2025-10-01 the
+    original ConnectomeDB is retired and the official route is "ConnectomeDB powered by
+    BALSA"; the recommended release is HCP-Young Adult 2025, which must not be mixed with
+    the 2017 S1200 release. The 2017 S1200 data are also available via AWS S3 with keys
+    generated in BALSA.
+homepage: https://www.humanconnectome.org/study/hcp-young-adult
+organization: WU-Minn HCP Consortium (Washington University - University of Minnesota); distributed by the Connectome Coordination Facility
+species:
+  - Homo sapiens
+tags:
+  - connectome
+  - twins
+  - multimodal MRI
+  - minimally preprocessed
+  - open access
+  - restricted access
+  - BALSA
+  - AWS S3
+modalities_overview:
+  - sMRI
+  - fMRI-rest
+  - fMRI-task
+  - dMRI
+  - MEG
+  - behavior
+  - cognition
+  - phenotype
+citation:
+  how_to_cite_url: https://www.humanconnectome.org/study/hcp-young-adult/document/hcp-citations
+  key_papers:
+    - title: "The WU-Minn Human Connectome Project: An Overview"
+      doi: 10.1016/j.neuroimage.2013.05.041
+      url: https://pmc.ncbi.nlm.nih.gov/articles/PMC3724347/
+    - title: The Minimal Preprocessing Pipelines for the Human Connectome Project
+      doi: 10.1016/j.neuroimage.2013.04.127
+      url: https://pmc.ncbi.nlm.nih.gov/articles/PMC3720813/
+cohort:
+  design: cross-sectional
+  countries:
+    - United States
+  population:
+    description_zh: >-
+      健康青年成人，主要来自约 300 个含双胞胎及其非双胞胎兄弟姐妹的家庭；招募自美国
+      （数据采集在华盛顿大学 3T、明尼苏达大学 7T、圣路易斯大学 MEG 完成）。家族结构
+      设计用于遗传度分析。数据被视为「非去标识化」，使用时须遵守所在机构人体受试者
+      研究规定（可能需要 IRB/伦理委员会批准或豁免认定）。
+    age_range:
+      min: 22
+      max: 35
+      unit: years
+    conditions:
+      - healthy
+    healthy_controls: true
+  n_participants:
+    value: 1206
+    definition_zh: >-
+      S1200（1200 Subjects）最终版本中拥有行为和/或 3T MR 数据的健康青年成人总数；
+      其中 1113 人有 3T 结构 MR、184 人有 7T MR、95 人有 MEG、46 人有 3T 重测数据。
+      BALSA 的 HCP-Young Adult 2025 项目列出 1206 人有行为/表型数据、1113 人有 MRI、
+      95 人有 MEG、182 人有 7T 数据。
+    as_of: "2026-11-14"
+    source_refs:
+      - hcp-s1200-release
+      - balsa-hcp-ya-project
+releases:
+  - id: hcp-ya-2025
+    name: HCP-Young Adult 2025
+    date: "2025-08-11"
+    notes_zh: >-
+      当前官方推荐版本，发布于「ConnectomeDB powered by BALSA」平台。对既有 3T、7T
+      与重测数据重新处理（SEBASED 场偏校正、去除运动回归、3T tfMRI multi-run FIX、
+      Reclean/spatial ICA 与 temporal ICA），并按 HCP Lifespan 项目的包格式重新打包。
+      官方明确警告：本版本数据不得与 2017 年 S1200 版本混合分析。1071 人有预处理数据
+      （含 45 名重测被试），1113 人有未处理影像数据，非影像/表型数据未变。
+      2025-10-01 原 db.humanconnectome.org 已下线，访问须改用 BALSA。
+      据 BALSA 2026-03-31 公告，本版本「目前仅在 BALSA 提供」，尚未加入 Amazon S3。
+    subsets:
+      - id: ya2025-3t-unprocessed
+        name: 3T 未处理影像（unprocessed）
+        modalities: [sMRI, fMRI-rest, fMRI-task, dMRI]
+        data_level: raw
+        n_participants: 1113
+        formats: [NIfTI, ZIP, gzip]
+        derivatives: []
+        size: "约 15.2 TB（S1200 全部 MR 未处理数据；S1200 参考手册数值）"
+        protocol_url: https://www.humanconnectome.org/study/hcp-young-adult/document/hcp-young-adult-2025-release
+        channels: [balsa-open-access]
+        notes_zh: >-
+          T1w、T2w、rfMRI、tfMRI、dMRI 的原始（DICOM 转 NIfTI）数据；2025 版本按新的
+          HCP package 打包，解压后目录结构与旧版相同。结构像已去面部/去耳。
+      - id: ya2025-3t-minimally-preprocessed
+        name: 3T HCP 最小预处理数据及分析衍生（recommended）
+        modalities: [sMRI, fMRI-rest, fMRI-task, dMRI]
+        data_level: preprocessed
+        n_participants: 1071
+        formats: [NIfTI, CIFTI-2, GIFTI, ZIP, gzip]
+        derivatives:
+          - MSM-Sulc / MSMAll 表面配准
+          - ICA-FIX 去噪 rfMRI（含 Reclean 与 Temporal ICA）
+          - tfMRI 个体分析结果与 multi-run FIX
+          - 皮层 myelin map、FreeSurfer 输出
+          - dMRI bedpostX
+        size: "约 63.0 TB（S1200 全部 MR 预处理数据；S1200 参考手册数值）"
+        protocol_url: https://www.humanconnectome.org/study/hcp-young-adult/document/hcp-young-adult-2025-release
+        channels: [balsa-open-access]
+        notes_zh: >-
+          官方推荐使用预处理数据（尤其 Preprocessed Recommended fMRI）；已最小化空间畸变
+          并完成跨模态、跨被试配准。仅保留无处理错误且至少有一个完整 rfMRI run 以完成
+          MSMAll 配准的 1071 名被试。
+      - id: ya2025-7t
+        name: 7T MR 子样本
+        modalities: [sMRI, fMRI-rest, fMRI-task, dMRI]
+        data_level: mixed
+        n_participants: 182
+        formats: [NIfTI, CIFTI-2, GIFTI, ZIP, gzip]
+        derivatives: [ICA-FIX 去噪 rfMRI, temporal ICA, MSMAll 配准]
+        size: "约 118 GB/人（S1200：未处理 13 GB + 预处理 105 GB，参考手册数值）"
+        protocol_url: https://balsa.wustl.edu/project?project=HCP_YA
+        channels: [balsa-open-access]
+        notes_zh: >-
+          BALSA 项目页列出 182 人有 7T 数据（2017 S1200 发布页与概览页写 184 人；数值
+          存在官方来源间差异，见报告）。主要为双胞胎子样本，含高分辨率 rfMRI、
+          retinotopy、movie-watching tfMRI 与 dMRI。
+      - id: ya2025-meg
+        name: MEG 子样本（静息态与任务态）
+        modalities: [MEG]
+        data_level: mixed
+        n_participants: 95
+        formats: [ZIP, gzip]
+        derivatives: [channel-level 预处理, source-level 处理, tMEG E-Prime 脚本]
+        size: "全部 95 人：未处理 799 GB、预处理 1.2 TB、含 source 共 4.7 TB（S1200 参考手册数值）"
+        protocol_url: https://balsa.wustl.edu/project?project=HCP_YA
+        channels: [balsa-open-access]
+        notes_zh: >-
+          约 50 对同性双胞胎；含 rMEG 与 tMEG（motor、working memory、language）。
+          95 人的数值来自 BALSA 项目页与 HCP 概览页；具体文件格式未在已抓取的官方页面
+          中明确列出，故仅填写确认的打包格式。
+      - id: ya2025-behavior-open
+        name: 开放行为/表型与非影像数据
+        modalities: [behavior, cognition, phenotype]
+        data_level: summary
+        n_participants: 1206
+        formats: [CSV]
+        derivatives: []
+        size: unknown
+        protocol_url: https://www.humanconnectome.org/study/hcp-young-adult/document/quick-reference-open-access-vs-restricted-data
+        channels: [balsa-open-access, aws-s3-s1200]
+        notes_zh: >-
+          含去面部影像、5 岁区间年龄组、性别，以及大部分 NIH Toolbox 认知/情绪/运动/
+          感觉与人格等行为测量；可在 BALSA 界面筛选并导出 CSV。2025 版本非影像数据未变。
+      - id: ya2025-behavior-restricted
+        name: 受限行为/家庭结构等敏感变量
+        modalities: [behavior, phenotype, clinical]
+        data_level: summary
+        n_participants: 1206
+        formats: [CSV]
+        derivatives: []
+        size: unknown
+        protocol_url: https://www.humanconnectome.org/study/hcp-young-adult/document/wu-minn-hcp-consortium-restricted-data-use-terms
+        channels: [balsa-restricted-access]
+        notes_zh: >-
+          Tier 1：精确年龄（按年）、双胞胎/合子性、家庭单元、种族/族裔、利手等；
+          Tier 2：色觉、身高/体重/BMI、尿药物筛查、SSAGA 访谈、HbA1c/TSH、
+          父母精神/神经疾病史等。每位使用者均须单独申请并获批，不得在组内再分发。
+  - id: s1200-2017
+    name: 1200 Subjects Data Release (S1200)
+    date: "2017-03-01"
+    notes_zh: >-
+      2017 年最终新增被试版本，含 1206 人的行为与 3T MR 数据（1113 人有结构像）、
+      46 人 3T 重测、184 人 7T、95 人 MEG。至今仍可从 AWS S3 获取（BALSA 于
+      2026-03-31 开放 S1200 的 S3 访问密钥生成/重置）；但官方在 2025 年公告中明确
+      指出 2025 版数据不得与 S1200 版混用分析。原 db.humanconnectome.org 已下线，
+      网页上的旧 ConnectomeDB 下载链接不再有效。
+    subsets:
+      - id: s1200-3t-unprocessed
+        name: 3T 未处理影像（S1200）
+        modalities: [sMRI, fMRI-rest, fMRI-task, dMRI]
+        data_level: raw
+        n_participants: 1113
+        formats: [NIfTI, ZIP, gzip]
+        derivatives: []
+        size: "约 15.2 TB（全部 MR 未处理数据）"
+        protocol_url: https://www.humanconnectome.org/study/hcp-young-adult/document/1200-subjects-data-release
+        channels: [aws-s3-s1200]
+        notes_zh: 原始 NIfTI 数据；此版本打包格式与 2025 版不同。
+      - id: s1200-3t-minimally-preprocessed
+        name: 3T 最小预处理与分析数据（S1200）
+        modalities: [sMRI, fMRI-rest, fMRI-task, dMRI]
+        data_level: preprocessed
+        n_participants: 1113
+        formats: [NIfTI, CIFTI-2, GIFTI, ZIP, gzip]
+        derivatives: [MSM-Sulc / MSMAll, ICA-FIX 去噪 rfMRI, tfMRI 分析结果, bedpostX]
+        size: "约 63.0 TB（全部 MR 预处理数据）；含分析数据共约 81.4 TB"
+        protocol_url: https://www.humanconnectome.org/study/hcp-young-adult/document/1200-subjects-data-release
+        channels: [aws-s3-s1200]
+        notes_zh: HCP v3 流水线预处理；S1200 的 dMRI 全部用 v3.19.0 重新预处理过。
+      - id: s1200-derivatives-ptn
+        name: S1200 深度处理组平均与 Parcellation + Timeseries + Netmats (PTN)
+        modalities: [fMRI-rest, fMRI-task, sMRI]
+        data_level: derivatives
+        n_participants: 1003
+        formats: [CIFTI-2, NIfTI, GIFTI, ZIP, Workbench scene]
+        derivatives:
+          - HCP_S1200_GroupAvg_v1
+          - 1003/812 人组平均 dense functional connectome
+          - group-ICA 组平均与个体化 parcellation
+          - 个体 node timeseries 与 parcellated connectomes（6 种 ICA 维度）
+          - HCP-MMP1.0 皮层分区参考
+        size: "HCP_S1200_GroupAvg_v1 为 2.3 GB；组平均 dense connectome 约 33 GB"
+        protocol_url: https://www.humanconnectome.org/study/hcp-young-adult/document/extensively-processed-fmri-data-documentation
+        channels: [aws-s3-s1200]
+        notes_zh: >-
+          2017-07-21 发布的 S1200 Extensively Processed fMRI Data。PTN 基于 1003 名
+          拥有完整 rfMRI 数据（4800 时间点）的被试；组平均结构/功能数据涉及 1096、
+          1003、812、997 等不同子集。GroupAvg 数据集另含 Workbench scene 与教程。
+      - id: s1200-behavior-open
+        name: 开放行为/表型数据（S1200）
+        modalities: [behavior, cognition, phenotype]
+        data_level: summary
+        n_participants: 1206
+        formats: [CSV]
+        derivatives: []
+        size: unknown
+        protocol_url: https://www.humanconnectome.org/study/hcp-young-adult/document/quick-reference-open-access-vs-restricted-data
+        channels: [aws-s3-s1200, balsa-open-access]
+        notes_zh: 与 2025 版本非影像数据相同（官方称 non-imaging data are unchanged）。
+      - id: s1200-behavior-restricted
+        name: 受限行为/家庭结构数据（S1200）
+        modalities: [behavior, phenotype, clinical]
+        data_level: summary
+        n_participants: 1206
+        formats: [CSV]
+        derivatives: []
+        size: unknown
+        protocol_url: https://www.humanconnectome.org/study/hcp-young-adult/document/wu-minn-hcp-consortium-restricted-data-use-terms
+        channels: [balsa-restricted-access]
+        notes_zh: 与 ya2025-behavior-restricted 内容相同；受限数据访问不随平台自动迁移。
+      - id: s1200-7t
+        name: 7T MR 子样本（S1200）
+        modalities: [sMRI, fMRI-rest, fMRI-task, dMRI]
+        data_level: mixed
+        n_participants: 184
+        formats: [NIfTI, CIFTI-2, GIFTI, ZIP, gzip]
+        derivatives: [ICA-FIX 去噪 rfMRI, 7T dMRI 预处理 v3.19.0, resting state stats]
+        size: "约 118 GB/人（未处理 13 GB + 预处理 105 GB）"
+        protocol_url: https://www.humanconnectome.org/study/hcp-young-adult/document/1200-subjects-data-release
+        channels: [aws-s3-s1200]
+        notes_zh: 184 人有 7T 多模态 MRI；22 名重测被试亦有 7T 数据。
+      - id: s1200-meg
+        name: MEG 子样本（S1200）
+        modalities: [MEG]
+        data_level: mixed
+        n_participants: 95
+        formats: [ZIP, gzip]
+        derivatives: [channel-level 预处理, source-level 处理]
+        size: "全部 95 人：未处理 799 GB、预处理 1.2 TB、含 source 共 4.7 TB"
+        protocol_url: https://www.humanconnectome.org/study/hcp-young-adult/document/1200-subjects-data-release
+        channels: [aws-s3-s1200]
+        notes_zh: 约 50 对双胞胎的静息态与任务态 MEG。
+access_channels:
+  - id: balsa-open-access
+    name: BALSA（ConnectomeDB powered by BALSA）— Open Access
+    url: https://balsa.wustl.edu/project?project=HCP_YA
+    platform: ConnectomeDB powered by BALSA (balsa.wustl.edu)
+    covers:
+      - ya2025-3t-unprocessed
+      - ya2025-3t-minimally-preprocessed
+      - ya2025-7t
+      - ya2025-meg
+      - ya2025-behavior-open
+      - s1200-behavior-open
+    requirements:
+      registration: true
+      agreement:
+        type: click-through
+        signed_by: self
+        url: https://www.humanconnectome.org/study/hcp-young-adult/document/wu-minn-hcp-consortium-open-access-data-use-terms
+      credentialing:
+        - BALSA 账号（需邮箱验证激活）
+        - 在 ConnectomeDB 标签页下点选并同意 HCP-Young Adult 2025 的 Data Use Terms
+        - 下载影像包需安装 IBM Aspera Connect 客户端及浏览器插件
+      institutional_signoff: "unknown"
+      ethics_approval: depends
+      eligibility:
+        students_can_apply: "yes"
+        commercial_use: unknown
+        notes_zh: >-
+          官方未对 Open Access 设置 PI 身份、学位或机构类型门槛：任何注册并同意条款者
+          均可访问；2025 年公告明确说明 HCP-YA 不要求机构邮箱（仅建议，以便未来数据集）。
+          条款既未禁止也未明确授权商业用途，故记为 unknown；已知义务为不得试图识别或
+          联系被试、须遵守所在机构规定、再分发时须沿用同一条款，并在成果中致谢与引用
+          HCP 方法论文。数据被视为非去标识化，官方提示可能需 IRB/伦理委员会批准或
+          豁免认定。
+      data_use_limitations: []
+      geographic_restrictions_zh: 官方条款中未列出地域限制。
+      source_refs:
+        - hcp-data-use-terms
+        - hcp-open-access-terms
+        - hcp-ya-2025-news
+        - balsa-hcp-ya-project
+      as_of: "2026-11-14"
+    cost:
+      model: free
+      tiers: []
+      compute_costs_zh: >-
+        数据本身免费（官方多处写明 freely distributing / freely distribute）；Aspera
+        浏览器插件官方注明免费。用户需自备存储与带宽。历史上的 Connectome in a Box
+        硬盘（按硬盘成本+运费收费）已于 2018-03 停止接单，store.humanconnectome.org
+        数据商店自 2018-03-12 永久关闭，现已不可用。
+      source_refs:
+        - hcp-overview
+        - hcp-aws-news
+        - hcp-cinab-retired
+        - hcp-store
+        - hcp-wiki-cdb-access
+      as_of: "2026-11-14"
+    delivery:
+      local_download: "yes"
+      cloud_platform: BALSA / Aspera
+      methods: [web, aspera]
+    process:
+      steps:
+        - order: 1
+          title_zh: 注册 BALSA 账号并激活
+          detail_zh: 在 balsa.wustl.edu 注册（HCP-YA 不要求机构邮箱，但官方建议使用机构邮箱以便访问未来数据集），通过确认邮件激活。
+        - order: 2
+          title_zh: 同意数据使用条款
+          detail_zh: 登录后点击 ConnectomeDB 标签页，在 HCP-Young Adult 2025 下点击 Data Use Terms，阅读并同意 Open Access Data Use Terms。
+        - order: 3
+          title_zh: 筛选并排队下载
+          detail_zh: 点击 HCP-Young Adult 2025 查看被试数据，用过滤器选择被试与数据包，加入下载队列；Files 标签页提供文档与资源（含 2025 版 Appendix III）。
+        - order: 4
+          title_zh: 安装 Aspera 并下载
+          detail_zh: 影像包及较大归档需 IBM Aspera Connect 客户端与浏览器插件；下载为 .zip 包并附 md5 校验，解压后目录结构保持不变。非影像 CSV 较小文件可直接网页下载。
+        - order: 5
+          title_zh: 遵守引用与再分发要求
+          detail_zh: 所有接触开放数据者（包括使用他人共享副本者）都须各自注册并同意条款；再分发须沿用同一 Open Access Data Use Terms，并在论文致谢中注明 WU-Minn HCP 资助来源。
+      validity:
+        duration_zh: >-
+          官方未说明条款有效期或访问到期时间；官方亦未公布审核时长，点选同意条款后即可
+          浏览与下载（无需审批等待）。
+        renewal_zh: 官方未说明续期机制；登录会话每 30 分钟超时需 renew（旧 ConnectomeDB wiki 说明）。
+      source_refs: [hcp-ya-2025-news, hcp-wiki-cdb-access, balsa-news]
+    restrictions_zh:
+      - 不得试图识别或联系任何被试；不会获得可链接至受保护健康信息的编码。
+      - 须遵守所在机构关于人体受试者研究的规则，可能需要 IRB/伦理委员会批准或豁免认定；官方明确称数据不被视为去标识化。
+      - 再分发原始或衍生开放数据时，必须沿用同一 Open Access Data Use Terms，且接收者亦须注册并同意条款。
+      - 须在成果中致谢 WU-Minn HCP 资助（NIH Blueprint 1U54MH091657 等）并引用相关方法论文；不得仅因使用数据而将 WU-Minn HCP 联盟列为作者。
+      - 违反条款将被终止访问权限。
+    china_notes_zh: >-
+      HCP-YA 官方条款未列地域限制。可核实的下载方式：BALSA 影像包使用 Aspera Connect
+      （官方 wiki 提到非美国 Mac 用户需在美国英语语言设置上的已知兼容问题，属一般安装注意事项）；
+      HCP 官方 wiki 说明 AWS S3 下载「对用户免费」并可作为 Aspera 的替代下载途径，
+      但注明通常不会比 Aspera 更快。官方未就中国境内网络可达性、镜像或加速作出说明，
+      故不作推测。
+  - id: balsa-restricted-access
+    name: HCP Restricted Access Data（受限数据）
+    url: https://www.humanconnectome.org/study/hcp-young-adult/document/wu-minn-hcp-consortium-restricted-data-use-terms
+    platform: HCP Restricted Access Application（DocuSign 电子申请表 / PDF 表格），审批后在 BALSA 中生效
+    covers:
+      - ya2025-behavior-restricted
+      - s1200-behavior-restricted
+    requirements:
+      registration: true
+      agreement:
+        type: DUA
+        signed_by: PI
+        url: https://www.humanconnectome.org/study/hcp-young-adult/document/wu-minn-hcp-consortium-restricted-data-use-terms
+      credentialing:
+        - 每位将查看/使用受限数据的研究者（从 PI 到受训人员）均须单独提交申请
+        - 申请由 PI/课题组长名义获批，PI 在申请中列出需要访问的组成员
+        - 非 PI 申请者须提供 PI 姓名，且 HCP 须先收到该 PI 的申请才能处理其申请
+        - 不符合 B1/B2 者可凭科学发表记录或由合格 PI 出具的书面推荐信（B3）取得资格
+        - 需填写个人姓名、职称、机构、最高学位、邮箱、电话，并手写签名与手写首字母缩写（打印/电子输入不予接受）
+        - 已获旧 ConnectomeDB 受限访问批准者，须把 BALSA 账号用户名与邮箱发给 BALSA curators 才能在新平台生效
+      institutional_signoff: false
+      ethics_approval: depends
+      eligibility:
+        students_can_apply: via_supervisor
+        commercial_use: allowed
+        notes_zh: >-
+          合格申请人为：大学/研究机构（明确含商业实体）/政府机构的 PI，或在其 PI 名下
+          工作的成员，或凭发表记录/合格 PI 推荐信被认定合格者。研究生等受训人员可以
+          申请，但必须由 PI 先提交申请并列出其姓名，且每位使用者独立申请。条款第 7 条
+          允许「在学术、研究、政府或商业实体主持下，仅用于科学研究、技术开发或教育」，
+          因此商业实体并未被排除，但用途被限制为科研/技术开发/教育。条款未列地域、
+          国籍或学生禁止条款。申请表仅要求申请人本人（或 PI）签名，未要求机构签署官
+          (institutional signing official) 会签；但条款第 6 条要求遵守所在机构关于人体
+          受试者研究的规定，可能需 IRB/伦理委员会批准。
+      data_use_limitations: []
+      geographic_restrictions_zh: 官方条款中未列出地域或国籍限制。
+      source_refs:
+        - hcp-restricted-terms
+        - hcp-restricted-usage
+        - hcp-restricted-application-pdf
+        - hcp-data-use-terms
+        - hcp-ya-2025-news
+      as_of: "2026-11-14"
+    cost:
+      model: free
+      tiers: []
+      compute_costs_zh: >-
+        官方条款与申请表中未列申请费或数据使用费；HCP 数据整体为免费分发。申请表仅要求
+        研究者信息与签名，未提及任何费用。
+      source_refs: [hcp-restricted-terms, hcp-restricted-application-pdf, hcp-overview]
+      as_of: "2026-11-14"
+    delivery:
+      local_download: "yes"
+      cloud_platform: BALSA（审批后在 ConnectomeDB powered by BALSA 中查看/导出受限字段）
+      methods: [web]
+    process:
+      steps:
+        - order: 1
+          title_zh: 确认资格并同意开放条款
+          detail_zh: 每位申请人须先接受 Open Access Data Use Terms；确认自己符合 PI / PI 名下成员 / 发表记录或推荐信三类资格之一。
+        - order: 2
+          title_zh: 填写并签署 Restricted Access Application
+          detail_zh: 通过官网链接的 DocuSign 电子申请表，或下载 2022-02-11 版 PDF 表格填写；PDF 版要求手写签名与手写首字母缩写（打印/电脑输入无效），并提供姓名、职称、机构、最高学位、邮箱、电话；非 PI 需填写 PI 姓名。
+        - order: 3
+          title_zh: 提交申请
+          detail_zh: PDF 表格按「姓_名首字母」命名（如 Smith_S），扫描后发送至 neuroscience-hcprda@email.wustl.edu 或传真至 314-747-4370（Erin Reid）；电子表通过 DocuSign 提交。B3 资格者另将论文引用/推荐 PI 姓名发送至 erin@wustl.edu。
+        - order: 4
+          title_zh: 等待逐案审批
+          detail_zh: 官方说明申请逐个处理、逐案（case-by-case）审批；申请表注明「可能需要最多一周才会确认收到申请」（acknowledged），并非审批完成时限。官方未公布完整审批时长。
+        - order: 5
+          title_zh: 在 BALSA 中启用受限访问
+          detail_zh: BALSA 与旧 ConnectomeDB 不共享用户信息，受限访问权限不会自动迁移；已获批者需把 BALSA 账号用户名和邮箱通过 BALSA 的 Contact Us 发给 curators。获批后可在界面切换 Open / Restricted / Sensitive 视图并导出受限字段。
+      official_timeline:
+        value: 1
+        unit: weeks
+        start_point_zh: 提交已签署的 Restricted Access Application
+        end_point_zh: 官方申请表仅保证「最多一周内确认收到申请」；未给出审批完成的时间线，故此值不代表获批时长
+        as_of: "2026-11-14"
+        source_refs: [hcp-restricted-application-pdf, hcp-restricted-usage]
+      validity:
+        duration_zh: 官方条款与申请表中未说明访问权限的有效期。
+        renewal_zh: 官方未说明续期机制。
+      source_refs: [hcp-restricted-terms, hcp-restricted-usage, hcp-restricted-application-pdf, hcp-ya-2025-news, hcp-wiki-cdb-access]
+    restrictions_zh:
+      - 不得向他人再分发或共享受限数据（包括本实验室成员），除非对方已独立申请并获 HCP 批准。
+      - 须以密码保护等方式保证数据安全，仅已获批者可访问。
+      - 发表时不得出现 HCP 分配的 Subject ID；须改用研究自定义编号（如 A、B、C）。
+      - 仅「家庭结构」可作为个体层面的受限元素报告；使用其他附加受限元素（精确年龄、利手、种族等）的分析每个报告须基于至少 3 名被试，且不得暴露个体编号与数值的对应关系。
+      - 论文被接收后须向 HCP 提交自定义编号与 HCP Subject ID 的对应表（subject key），不得自行公开该对应表。
+      - 仅限科学研究、技术开发或教育用途；遵守所在机构人体受试者研究规定（可能需 IRB/伦理委员会批准）。
+      - 部分元素（如药物检测）可能被要求额外说明理由；HCP PI David Van Essen 可要求删除特定数据集。
+      - 违规可导致访问被终止，并可能通知所在机构、期刊与资助方。
+    china_notes_zh: >-
+      官方条款未列地域限制，也未针对中国申请者给出特别流程。可核实的实务点：申请表要求
+      手写签名与手写首字母缩写并扫描为 PDF 通过邮件（或传真）提交，电子/打印输入不予接受；
+      通信与提交主要依托电子邮件（neuroscience-hcprda@email.wustl.edu、erin@wustl.edu）
+      及 DocuSign 在线表单。官方未说明中国机构是否需要额外签署、公证或出口管制文件，
+      故不作推测。
+  - id: aws-s3-s1200
+    name: AWS S3 开放数据桶（HCP OpenAccess，S1200）
+    url: https://registry.opendata.aws/hcp-openaccess/
+    platform: AWS S3（arn:aws:s3:::hcp-openaccess，us-east-1）；AWS Open Data Sponsorship Program
+    covers:
+      - s1200-3t-unprocessed
+      - s1200-3t-minimally-preprocessed
+      - s1200-derivatives-ptn
+      - s1200-behavior-open
+      - s1200-7t
+      - s1200-meg
+      - ya2025-behavior-open
+    requirements:
+      registration: true
+      agreement:
+        type: license
+        signed_by: self
+        url: https://www.humanconnectome.org/storage/app/media/data_use_terms/DataUseTerms-HCP-Open-Access-26Apr2013.pdf
+      credentialing:
+        - 接受 HCP Open Access Data Use Terms（AWS 注册条目将其列为 License/HCP Data Use Agreement）
+        - 历史流程：登录 ConnectomeDB / BALSA 后为每个数据集接受条款，再生成一套 AWS 凭据（login + public access key + secret access key）
+        - BALSA 2026-03-31 起在 HCP-YA 项目页提供「Get/Reset AWS S3 Access」生成/重置密钥（针对 2017 S1200 数据）
+        - 生成新密钥会使旧密钥失效；HCP 不保存密钥副本，须自行本地保存
+      institutional_signoff: "unknown"
+      ethics_approval: depends
+      eligibility:
+        students_can_apply: "yes"
+        commercial_use: unknown
+        notes_zh: >-
+          AWS Marketplace 页面称该开放数据「可用或不用 AWS 账号访问」「无需订阅」，
+          Registry 页面把资源标为 Controlled Access 并链接 HCP wiki 的凭据流程；
+          二者在是否需要 HCP 签发的 S3 凭据上存在不一致，见报告。该通道同样适用 HCP
+          Open Access Data Use Terms，条款未明确说明商业用途，故记为 unknown；已知义务
+          包括遵守机构规定与不得识别被试等。
+      data_use_limitations: []
+      geographic_restrictions_zh: AWS 注册条目与 HCP 条款中未列出地域限制。
+      source_refs:
+        - aws-registry-hcp
+        - aws-marketplace-hcp
+        - hcp-wiki-aws
+        - balsa-news
+        - hcp-aws-news
+      as_of: "2026-11-14"
+    cost:
+      model: free
+      tiers: []
+      compute_costs_zh: >-
+        数据本身免费：AWS Marketplace 写明「公开数据集，无需订阅」，属 AWS Open Data
+        Sponsorship Program（由 AWS 承担存储成本）；HCP wiki 说明经 S3 下载数据
+        「对用户免费」，但在 AWS 上跑计算（如 EC2）会由 Amazon 按算力收费。2017 年
+        官方公告称 S1200 全集约 76 TB。跨区域出站流量等 AWS 费用未在官方页面逐项说明。
+      source_refs: [aws-marketplace-hcp, aws-registry-hcp, hcp-wiki-aws, hcp-aws-news]
+      as_of: "2026-11-14"
+    delivery:
+      local_download: "yes"
+      cloud_platform: AWS S3（us-east-1）
+      methods: [aws-s3, api]
+    process:
+      steps:
+        - order: 1
+          title_zh: 接受 Open Access Data Use Terms
+          detail_zh: 官方 wiki 说明，访问由用户对每个数据集条款的接受情况控制；BALSA/ConnectomeDB 上需先注册并同意 HCP Open Access Data Use Terms。
+        - order: 2
+          title_zh: 生成 AWS S3 访问凭据
+          detail_zh: 在 BALSA 的 HCP-YA 项目页点击「Get/Reset AWS S3 Access」（BALSA 2026-03-31 公告：为 2017 年 S1200 数据提供密钥生成/重置）；凭据含 login、public access key、secret access key，须本地保存，生成新密钥会使旧密钥失效。
+        - order: 3
+          title_zh: 连接并访问 S3 桶
+          detail_zh: 用 S3 Browser、CyberDuck 或 AWS CLI 等以该凭据访问 hcp-openaccess 桶（HCP/ 前缀）；AWS Marketplace 页面另给出 aws s3 ls --no-sign-request s3://hcp-openaccess/ 的匿名访问示例。
+        - order: 4
+          title_zh: 下载或在云端计算
+          detail_zh: 可作为 Aspera 的替代下载途径（官方称通常不会更快），也可在 EC2 上直接处理；云端计算由 AWS 计费。
+      validity:
+        duration_zh: >-
+          官方未说明 S3 凭据的有效期；仅说明重置/新生成密钥会使旧密钥失效。官方 wiki 称
+          生成凭据时与桶通信会有「短暂延迟」，随即取得凭据，未给出审核时长。
+        renewal_zh: 可在 BALSA 项目页重新生成（Get/Reset AWS S3 Access）；重新生成后旧凭据不可再用。
+      source_refs: [hcp-wiki-aws, balsa-news, aws-registry-hcp, aws-marketplace-hcp]
+    restrictions_zh:
+      - 访问权限取决于是否已接受相应数据集的 Open Access Data Use Terms；不得绕过条款获取受限数据。
+      - HCP Open Access Data Use Terms 的全部义务同样适用（不得识别被试、遵守机构规定、再分发沿用同条款、致谢与引用等）。
+      - 桶内为开放数据；restricted 变量不在开放 S3 桶中提供。
+      - 官方 BALSA 公告：目前推荐的 HCP-YA 2025 版本「仅在 BALSA 提供」，尚未加入 Amazon S3，因此该通道对应的是 2017 S1200 数据。
+      - AWS Marketplace 页面含免责声明：产品描述由供应商负责，AWS 不保证其准确、完整或最新。
+    china_notes_zh: >-
+      可核实的实务点：HCP 官方 wiki 明确把 AWS S3 列为 Aspera 之外「对用户免费」的下载
+      替代途径（并注明通常不会比 Aspera 快），桶位于 us-east-1；AWS Marketplace 给出
+      aws s3 ls --no-sign-request s3://hcp-openaccess/ 的 AWS CLI 用法。官方未就中国境内
+      访问 AWS S3 的连通性、是否需境外 AWS 账号、流量费用或合规要求作任何说明，故不作推测。
+status: changing
+status_note_zh: >-
+  数据分发渠道正处于迁移期，故标为 changing。已核实的时间线：2025-08-11 发布
+  HCP-Young Adult 2025，并上线新平台「ConnectomeDB powered by BALSA」，官方说明
+  原 ConnectomeDB（2013 年起使用）软件过旧、计划完全关闭；2025-10-01 BALSA 公告
+  确认 db.humanconnectome.org 已下线，须改用 BALSA 的 ConnectomeDB 标签页并同意
+  HCP Open Access Data Use Terms（实测该旧 URL 现重定向到 balsa.wustl.edu）。
+  2025 年公告同时说明新版数据尚未加入 Amazon S3、将来可能加入；2026-03-31 BALSA
+  公告才为 2017 年 S1200 数据开放 S3 密钥生成/重置，并再次确认「目前推荐的
+  HCP-YA 2025 版本只在 BALSA 提供」。2025-11 至 2025-12 曾有 Aspera 文件系统故障，
+  2025-12-01 公告已恢复；2026-05 与 2026-07 另有计划内维护。BALSA 与旧
+  ConnectomeDB 不共享用户信息，Open/Restricted 权限均需在新平台重新确认。
+  humanconnectome.org 部分页面仍保留「Download From ConnectomeDB」「Order Connectome
+  In A Box Hard Drives」旧链接；store 首页已声明数据商店自 2018-03-12 永久关闭，
+  故这些旧入口不可作为当前获取途径。
+sources:
+  - id: hcp-ya-study-home
+    title: HCP Young Adult study overview / current data releases (humanconnectome.org)
+    url: https://www.humanconnectome.org/study/hcp-young-adult
+    accessed: "2026-11-14"
+  - id: hcp-overview
+    title: "Overview of the Human Connectome Project (1,200 normal young adults, ages 22-35; 1113 3T, 184 7T, 95 MEG)"
+    url: https://www.humanconnectome.org/study/hcp-young-adult/overview
+    accessed: "2026-11-14"
+  - id: hcp-data-releases
+    title: HCP Young Adult — Current Data Releases (HCP-Young Adult 2025 / S1200 / S1200 Extensively Processed)
+    url: https://www.humanconnectome.org/study/hcp-young-adult/data-releases
+    accessed: "2026-11-14"
+  - id: hcp-ya-2025-release
+    title: HCP-Young Adult 2025 Release (Aug 11, 2025; platform, counts, do-not-mix warning)
+    url: https://www.humanconnectome.org/study/hcp-young-adult/document/hcp-young-adult-2025-release
+    accessed: "2026-11-14"
+  - id: hcp-ya-2025-news
+    title: "Updated HCP-Young Adult data on ConnectomeDB powered by BALSA (Aug 11, 2025; access steps, RA transfer)"
+    url: https://www.humanconnectome.org/study/hcp-young-adult/article/updated-hcp-young-adult-data-released-connectomedb-powered-balsa
+    accessed: "2026-11-14"
+  - id: hcp-s1200-release
+    title: 1200 Subjects Data Release (Mar 01, 2017; 1206 subjects, 1113 structural, 184 7T, 95 MEG, 46 retest)
+    url: https://www.humanconnectome.org/study/hcp-young-adult/document/1200-subjects-data-release
+    accessed: "2026-11-14"
+  - id: hcp-s1200-reference-manual
+    title: WU-Minn HCP 1200 Subjects Data Release Reference Manual (PDF; formats, sizes, processing levels, defacing)
+    url: https://www.humanconnectome.org/storage/app/media/documentation/s1200/HCP_S1200_Release_Reference_Manual.pdf
+    accessed: "2026-11-14"
+  - id: hcp-extensively-processed
+    title: "S1200 Extensively Processed fMRI Data (Jul 21, 2017; GroupAvg v1, dense connectome, PTN)"
+    url: https://www.humanconnectome.org/study/hcp-young-adult/document/extensively-processed-fmri-data-documentation
+    accessed: "2026-11-14"
+  - id: hcp-data-use-terms
+    title: "HCP Data Use Terms: Important! (two-tier open/restricted, IRB note, sign terms on BALSA)"
+    url: https://www.humanconnectome.org/study/hcp-young-adult/data-use-terms
+    accessed: "2026-11-14"
+  - id: hcp-open-access-terms
+    title: WU-Minn HCP Consortium Open Access Data Use Terms (Apr 26, 2013)
+    url: https://www.humanconnectome.org/study/hcp-young-adult/document/wu-minn-hcp-consortium-open-access-data-use-terms
+    accessed: "2026-11-14"
+  - id: hcp-restricted-terms
+    title: WU-Minn HCP Consortium Restricted Data Use Terms (Jul 22, 2016; eligibility, obligations)
+    url: https://www.humanconnectome.org/study/hcp-young-adult/document/wu-minn-hcp-consortium-restricted-data-use-terms
+    accessed: "2026-11-14"
+  - id: hcp-restricted-usage
+    title: Restricted Data Usage (every investigator applies individually, case-by-case approval)
+    url: https://www.humanconnectome.org/study/hcp-young-adult/document/restricted-data-usage
+    accessed: "2026-11-14"
+  - id: hcp-restricted-application-pdf
+    title: WU-Minn HCP Terms for Access to Restricted Data — application form PDF (updated Feb 11, 2022)
+    url: https://www.humanconnectome.org/storage/app/media/data_use_terms/DataUseTerms_HCP_RestrictedAccess_11Feb2022.pdf
+    accessed: "2026-11-14"
+  - id: hcp-open-vs-restricted
+    title: "Quick Reference: Open Access vs Restricted Data (Tier 1 / Tier 2 elements)"
+    url: https://www.humanconnectome.org/study/hcp-young-adult/document/quick-reference-open-access-vs-restricted-data
+    accessed: "2026-11-14"
+  - id: hcp-citations
+    title: HCP Citations (acknowledgement wording and key method publications)
+    url: https://www.humanconnectome.org/study/hcp-young-adult/document/hcp-citations
+    accessed: "2026-11-14"
+  - id: hcp-recruitment
+    title: Components of the HCP — Recruitment (sibships/twins, US diversity)
+    url: https://www.humanconnectome.org/study/hcp-young-adult/project-protocol/components-human-connectome-project-recruitment
+    accessed: "2026-11-14"
+  - id: balsa-hcp-ya-project
+    title: "BALSA HCP-Young Adult 2025 project page (Data Use Terms, Aspera, Get/Reset AWS S3 Access, 1113/95/182/1206 counts)"
+    url: https://balsa.wustl.edu/project?project=HCP_YA
+    accessed: "2026-11-14"
+  - id: balsa-news
+    title: "BALSA News (Oct 1 2025 ConnectomeDB taken down; Mar 31 2026 S3 keys for S1200; 2025 release not on S3; Aspera outage/maintenance)"
+    url: https://balsa.wustl.edu/news/index
+    accessed: "2026-11-14"
+  - id: balsa-home-via-old-cdb
+    title: "db.humanconnectome.org (now redirects to balsa.wustl.edu; ConnectomeDB tab, project counts, last updated Aug 2025)"
+    url: https://db.humanconnectome.org/
+    accessed: "2026-11-14"
+  - id: hcp-wiki-cdb-access
+    title: HCP Wiki — How to Access Data on ConnectomeDB (registration, Aspera, CSV, restricted views, zip/md5)
+    url: https://wiki.humanconnectome.org/docs/How%20to%20Access%20Data%20on%20ConnectomeDB.html
+    accessed: "2026-11-14"
+  - id: hcp-wiki-aws
+    title: HCP Wiki — How To Connect to Connectome Data via AWS (S3 credentials, free download, compute costs)
+    url: https://wiki.humanconnectome.org/docs/How%20To%20Connect%20to%20Connectome%20Data%20via%20AWS.html
+    accessed: "2026-11-14"
+  - id: hcp-aws-news
+    title: "HCP S1200 Release now available on Amazon Web Services (May 11, 2017; ~76TB, AWS Public Data Sets)"
+    url: https://www.humanconnectome.org/study/hcp-young-adult/article/hcp-s1200-release-now-available-amazon-web-services
+    accessed: "2026-11-14"
+  - id: hcp-cinab-retired
+    title: "Connectome In A Box Program To Be Retired (Jan 17, 2018)"
+    url: https://www.humanconnectome.org/study/hcp-young-adult/article/connectome-box-program-be-retired
+    accessed: "2026-11-14"
+  - id: hcp-store
+    title: "HCP store home page (data storefront permanently closed as of March 12th, 2018)"
+    url: https://store.humanconnectome.org/
+    accessed: "2026-11-14"
+  - id: aws-registry-hcp
+    title: "Registry of Open Data on AWS — The Human Connectome Project (hcp-openaccess, us-east-1, HCP Data Use Agreement)"
+    url: https://registry.opendata.aws/hcp-openaccess/
+    accessed: "2026-11-14"
+  - id: aws-marketplace-hcp
+    title: "AWS Marketplace — The Human Connectome Project (Open Data Sponsorship, no subscription, --no-sign-request CLI example)"
+    url: https://aws.amazon.com/marketplace/pp/prodview-itmdjpeqeefvc
+    accessed: "2026-11-14"
+  - id: pmc-vanessen-2013
+    title: "Van Essen et al. 2013, The WU-Minn Human Connectome Project: An Overview (DOI metadata)"
+    url: https://pmc.ncbi.nlm.nih.gov/articles/PMC3724347/
+    accessed: "2026-11-14"
+  - id: pmc-glasser-2013
+    title: "Glasser et al. 2013, The Minimal Preprocessing Pipelines for the HCP (DOI metadata)"
+    url: https://pmc.ncbi.nlm.nih.gov/articles/PMC3720813/
+    accessed: "2026-11-14"
+verification:
+  last_verified: "2026-11-14"
+  verified_by: claude-subagent
+  review_due: "2027-05-14"
+  method: official-docs

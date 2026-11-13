@@ -1,0 +1,406 @@
+schema_version: "0.1"
+id: uk-biobank
+name:
+  zh: "UK Biobank（英国生物样本库）"
+  en: "UK Biobank"
+  aliases:
+    - "UKB"
+    - "UK Biobank Resource"
+    - "英国生物样本库"
+    - "英国生物银行"
+summary:
+  zh: "UK Biobank 是英国约 50 万人的前瞻性人群队列（2006–2010 年招募，招募时 40–69 岁）。本条目聚焦其脑影像子集：3T Siemens Skyra、约 35 分钟扫描协议，包含 T1 加权结构像、T2-FLAIR、磁敏感加权成像(SWI)、扩散 MRI、静息态 fMRI、任务态 fMRI（面孔/形状情绪任务）与动脉自旋标记(ASL)；影像访问自 2014 年（instance 2）开始，2019 年起有重复影像访问（instance 3）。影像以压缩 DICOM 及预处理/中间/全处理 NIFTI 提供；另有由 FSL/FreeSurfer 流水线生成的影像衍生表型(IDPs)、连接组与纵向指标作为衍生数据，可与问卷、身体测量、链接医疗记录及基因型/外显子/全基因组数据联用。官方明确不提供常规 EEG 数据，也不提供 CT。个体层面数据不能下载到本地，须经 AMS 申请、机构授权签字人签署 MTA 后在 UK Biobank Research Analysis Platform (UKB-RAP) 云端分析；访问费按档位收取，云计算与存储另计。截至 2026-11-14，新申请处于暂停状态，官方表示计划在 2026 年末重新接受申请。"
+  en: "UK Biobank is a UK population-based prospective cohort of about 500,000 participants recruited in 2006-2010 at ages 40-69. This record focuses on its brain imaging subset: a 3T Siemens Skyra, ~35-minute protocol covering T1-weighted structural MRI, T2-FLAIR, susceptibility-weighted imaging (SWI), diffusion MRI, resting fMRI, task fMRI (a faces/shapes emotion task) and arterial spin labelling, with imaging visits from 2014 (instance 2) and repeat imaging from 2019 (instance 3). Images are supplied as zipped DICOM plus pre-processed, intermediate and fully processed NIFTI; imaging-derived phenotypes (IDPs), connectomes and longitudinal metrics produced by the FSL/FreeSurfer pipeline are available as derivatives, linkable to questionnaire, physical measurement, linked health-record and genotyping/exome/whole-genome data. UK Biobank states it does not provide general EEG data or CT scans. Individual-level data cannot be downloaded locally: access requires an AMS application, an MTA signed by an authorised institutional signatory, and analysis on the UK Biobank Research Analysis Platform (UKB-RAP), with tiered access fees plus separate cloud compute charges. As of 2026-11-14 new applications are paused; UK Biobank states it intends to accept new applications in late 2026."
+homepage: "https://www.ukbiobank.ac.uk/"
+organization: "UK Biobank Limited（UK Biobank Coordinating Centre, Stockport, UK；影像项目由 MRC、Wellcome、British Heart Foundation、Dementias Platform UK 等资助）"
+species:
+  - "Homo sapiens"
+tags:
+  - "population cohort"
+  - "brain MRI"
+  - "imaging genetics"
+  - "controlled access"
+  - "cloud-only"
+  - "longitudinal"
+citation:
+  how_to_cite_url: "https://community.ukbiobank.ac.uk/hc/en-gb/articles/16594178325277-Submitting-publications-and-use-of-UK-Biobank-images"
+  key_papers:
+    - title: "The UK Biobank imaging enhancement of 100,000 participants: rationale, data collection, management and future directions"
+      doi: "10.1038/s41467-020-15948-9"
+      url: "https://www.nature.com/articles/s41467-020-15948-9"
+    - title: "Image processing and Quality Control for the first 10,000 brain imaging datasets from UK Biobank"
+      doi: "10.1016/j.neuroimage.2017.10.034"
+      url: "https://doi.org/10.1016/j.neuroimage.2017.10.034"
+modalities_overview:
+  - sMRI
+  - fMRI-rest
+  - fMRI-task
+  - dMRI
+  - ASL
+  - SWI
+  - behavior
+  - clinical
+  - phenotype
+  - genetics
+cohort:
+  design: longitudinal
+  countries:
+    - "United Kingdom"
+  population:
+    description_zh: "英国基于人群的前瞻性队列：2006–2010 年间在英格兰、威尔士和苏格兰共 22 个评估中心招募约 50 万名参与者，招募时年龄 40–69 岁，受邀者约 920 万人（居住在评估中心 25 英里/40 公里内），基线参与率 5.5%。官方论文指出存在明显的“健康志愿者”选择偏倚：参与者相对更年长、女性更多、社会经济剥夺程度更低，肥胖、吸烟、每日饮酒及自报疾病更少，因此队列并不代表总体人群。影像子研究自 2014 年起重新邀请参与者接受脑、心脏、腹部 MRI、DXA 与颈动脉超声，2025 年 7 月达成 10 万人目标；重复影像访问自 2019 年起进行，并正在试验第三次影像访问。age_range 为招募时年龄，影像访问时参与者年龄更大。"
+    age_range:
+      min: 40
+      max: 69
+      unit: years
+    conditions:
+      - "一般人群队列（非按疾病入组）"
+      - "通过问卷与链接医疗记录随访获得的常见病结局（官方影像项目页列举痴呆、心脏病、关节炎、糖尿病等）"
+    healthy_controls: "unknown"
+  n_participants:
+    value: 500000
+    definition_zh: "2006–2010 年基线招募的参与者总数；UKB 官网多处表述为“500,000 participants”/“half a million volunteers”，遗传数据页面（基因型与填补、全外显子、全基因组、端粒长度）各项亦标注“Current availability: 500,000 participants”。该整数为官方口径的约数，非逐人精确计数。"
+    as_of: "2026-11-14"
+    source_refs:
+      - ukb-cohort-paper
+      - ukb-genetic-data-types
+      - ukb-global-use
+releases:
+  - id: imaging
+    name: "脑与全身影像（v20 数据发布）及配套表型/遗传数据"
+    date: "2025-11-20"
+    notes_zh: "date 取 2025-11-20 的 v20 数据发布（官网新闻发布日期）：该次发布把 100,000 名参与者的影像数据上传至 UKB-RAP，并更新脑影像流水线输出（累计约 90,000 人）、新增 82,000 人的预处理脑影像数据。表型/遗传子集是自建库以来持续更新的背景数据，官方未给出单一发布日期，故并入本 release 并在此说明；影像数据本身自 2015 年起分批发布、并非一次发布。"
+    subsets:
+      - id: raw-imaging
+        name: "脑 MRI 原始与预处理影像（DICOM / NIFTI）"
+        modalities:
+          - sMRI
+          - fMRI-rest
+          - fMRI-task
+          - dMRI
+          - ASL
+          - SWI
+        data_level: mixed
+        n_participants: "unknown"
+        formats:
+          - "DICOM（zipped，Showcase category 507）"
+          - "NIFTI（预处理 / 中间 / 全处理，Showcase category 508）"
+        derivatives:
+          - "脑影像衍生表型 IDPs（见 idps 子集）"
+          - "结构与功能连接组（Showcase category 509 / 203 / 204）"
+          - "PANDORA 体素级与超体素矩阵（官方研讨会称覆盖 >82,000 人）"
+        size: "unknown"
+        protocol_url: "https://biobank.ndph.ox.ac.uk/showcase/label.cgi?id=100"
+        channels:
+          - ams-rap
+        notes_zh: "3T Siemens Skyra、约 35 分钟脑扫描协议；包含 T1 加权结构像、T2-FLAIR、SWI、扩散 MRI、静息态 fMRI、任务态 fMRI（面孔/形状情绪任务）与 ASL。DICOM 转换为预处理/中间/全处理 NIFTI；NIFTI 的 T1、T2 序列已去面部(defaced)，原始 T1/T2 DICOM 仅在有正当科学理由不使用去面部图像时另行向 Access 团队申请。影像访问始于 instance 2（2014 年首次影像访问），instance 3 为 2019 年起的重复影像访问，两者目前均在进行。人数口径不一致，故 n_participants 记 unknown：官网“影像数据类型”页称 MRI 当前覆盖 100,000 名参与者、3,000 人有两年内重复影像；影像项目页称 10 万人完成首次扫描、逾 5,000 人完成第二次扫描；社区“影像研究”页称 2025 年 7 月达成目标、逾 105,000 人参加过影像预约；v20 研讨会称脑影像流水线输出累计约 90,000 人、新增预处理脑影像 82,000 人。上述数字分别对应全身影像预约、脑影像输出与预处理子集，不能等同于脑原始影像人数。UKB-RAP 官网称平台集中存放超过 30 PB 个体层面数据（全平台口径，非本子集体量），故 size 记 unknown。"
+      - id: idps
+        name: "脑影像衍生表型（IDPs）、连接组与纵向指标"
+        modalities:
+          - sMRI
+          - fMRI-rest
+          - fMRI-task
+          - dMRI
+          - ASL
+          - SWI
+        data_level: derivatives
+        n_participants: "unknown"
+        formats:
+          - "数值型表格式数据字段（Showcase data-fields / UKB-RAP 表格数据）"
+        derivatives:
+          - "任务态与静息态 fMRI IDPs（category 106 / 111）"
+          - "T1、T2、ASL、扩散、SWI 的 IDPs（category 110 / 112 / 119 / 107 / 109）"
+          - "静息态与任务态 fMRI 的基于表面分析（category 198）"
+          - "功能与结构连接组（category 203 / 204 / 509）"
+          - "FreeSurfer 纵向指标（v20 新增，category 530–537）"
+        size: "unknown"
+        protocol_url: "https://biobank.ctsu.ox.ac.uk/crystal/refer.cgi?id=2006"
+        channels:
+          - ams-rap
+        notes_zh: "IDPs 是定量、可直接作为数据字段使用的影像衍生指标，由 UKB 脑影像流水线（使用 FSL、FreeSurfer 等）从 MR DICOM 自动生成并做质量控制，核心流程见 Alfaro-Almagro et al. (2018)。与 raw-imaging 子集的关系：原始影像为 DICOM/NIFTI 图像，IDPs 为其衍生表格数据；官方同时提醒 Showcase 与 UKB-RAP 上的衍生数据量可能不一致，因部分衍生数据由外部研究者返回 UKB 而非 UKB 内部生成，通常配发的只是原始扫描图像。v20 中脑影像流水线更新、输出累计约 90,000 人，另新增 82,000 人预处理脑影像；各 IDP 类别覆盖人数不同且官方未给出统一数字，故 n_participants 记 unknown。"
+      - id: phenotype-genetics
+        name: "表型、问卷、身体测量、医疗记录与遗传数据（背景/上下文）"
+        modalities:
+          - behavior
+          - clinical
+          - phenotype
+          - genetics
+        data_level: mixed
+        n_participants: 500000
+        formats:
+          - "表格型数据字段（Showcase data-fields / UKB-RAP 表格数据）"
+          - "CRAM（WGS / WES；官方 2026-11-10 说明目前暂停向任何项目提供）"
+        derivatives:
+          - "填补基因型（官方遗传数据页：约 850,000 个直接测量变异，>9,000 万个填补变异）"
+          - "CHIP（克隆性造血）数据（v20 新闻：覆盖全部 50 万参与者）"
+          - "代谢组学数据（v20 新闻：覆盖全部 50 万参与者，含 20,000 人五年后第二次样本）"
+        size: "unknown"
+        protocol_url: "https://www.ukbiobank.ac.uk/about-our-data/types-of-data/"
+        channels:
+          - ams-rap
+        notes_zh: "作为脑影像研究的联用背景数据。官网将数据分为八类：影像、生物标志物、遗传、医疗记录、问卷、身体测量、人口学/生活方式/自报健康、环境数据。遗传数据页对基因型与填补、全外显子、全基因组、端粒长度均标注“Current availability: 500,000 participants”。UKB-RAP 官网称平台集中存放超过 30 PB 个体层面数据（全平台口径），未给出本子集单独体量，故 size 记 unknown。2026-11-10 的官方变更说明：WGS/WES 的 CRAM 文件暂时不向任何项目提供；限制级住宅地理位置字段永久移除。样本（biospecimen）访问另有 Sample Release Policy 且容量受限，本子集仅指数据、不含生物样本实体。"
+access_channels:
+  - id: ams-rap
+    name: "AMS 申请 → UK Biobank Research Analysis Platform (UKB-RAP)"
+    url: "https://www.ukbiobank.ac.uk/use-our-data/apply-for-access/"
+    platform: "UK Biobank Research Analysis Platform (UKB-RAP)，与 DNAnexus 合作开发、由 Amazon Web Services (AWS) 提供算力；内置 JupyterLab、RStudio、Apache Spark、WDL、Cohort Browser、Platform API / dx CLI 等"
+    covers:
+      - raw-imaging
+      - idps
+      - phenotype-genetics
+    requirements:
+      registration: true
+      agreement:
+        type: MTA
+        signed_by: institution
+        url: "https://www.ukbiobank.ac.uk/material-transfer-agreement/"
+      credentialing:
+        - "须在 Access Management System (AMS) 以本人机构邮箱注册，注册免费，官方目标 10 个工作日内完成审核；不得代他人注册"
+        - "须证明有合法健康相关研究履历、隶属于获认可的研究机构，且所在国家遵守国际法规、不受英国/美国/欧盟制裁；UK Biobank 受训人员对每位申请者做背景审查（学界、慈善、政府、商业机构一视同仁）"
+        - "须完成 4 项强制培训并通过测验（通过线 80%）：MRC《Confidentiality and Data Protection in Health Research》（证书须为近 12 个月内取得，另需 70% 通过并上传至 AMS）、UK Biobank 简介、UKB-RAP 简介、代码仓库培训；未完成者不予开通 UKB-RAP，已有访问可能被暂停"
+        - "AMS 已启用多因素认证(MFA)；UKB-RAP 重开前须登录设置，平台 15 分钟无操作即登出并需二次认证"
+      institutional_signoff: true
+      ethics_approval: depends
+      eligibility:
+        students_can_apply: "yes"
+        commercial_use: allowed
+        notes_zh: "学生：可以由学生本人作为 Applicant PI 提交申请，也可以由导师作为申请人；两种情况下学生与导师都必须同时列入申请（学生为 PI 时须把导师加为合作者，导师为 PI 时须把学生加为合作者），否则不享受 £500 学生减免档。学生定义为正在攻读 BSc/MSc/MD/PhD 等学位者，博士后与全职雇员不符合。商业用途：官网明确接受来自学术、慈善、政府与商业组织、全球各地研究者的申请，前提是健康相关且符合公共利益；但自 2025 年 1 月起不再批准保险公司为研究目的直接访问去标识数据的申请（保险公司可与获批研究者合作/资助，或引用已发表结果，但不获得数据直接访问权）。伦理：官方 FAQ 答“Not usually”——UK Biobank 已取得 Research Tissue Bank (RTB) 伦理批准（REC 编号 16/NW/0274），覆盖大多数拟议用途，研究者通常无需另行取得伦理批准；但申请重新联系参与者(re-contact)必须另行取得 Research Ethics Committee 批准，故本字段记 depends。研究须为健康相关、符合公共利益，且成果应在同行评议期刊或开放平台发表。"
+      geographic_restrictions_zh: "官方 FAQ 明确“Do I need to be based in the UK to access the Resource? No. The Resource is available to all bona fide researchers regardless of their location”，官网亦写明接受全球申请（超过 60 个国家、22,000 余名研究者）。唯一的地域性条件是资格页所列：申请人所在国家须遵守国际法规且不受英国、美国或欧盟制裁。"
+      source_refs:
+        - ukb-eligibility
+        - ukb-access-to-data
+        - ukb-community-faq
+        - ukb-community-apply
+        - ukb-community-training
+        - ukb-community-changes
+        - ukb-mta
+        - ukb-community-training-use
+        - ukb-global-use
+      as_of: "2026-11-14"
+    cost:
+      model: tiered
+      tiers:
+        - name: "Tier 1"
+          amount: 3000
+          currency: GBP
+          period: per-project
+          notes_zh: "问卷与身体测量、健康结局表型、链接健康数据、网络问卷。覆盖前 3 年（含定期数据更新）；费用不含 VAT，且仅包含经 UKB-RAP 访问数据。"
+        - name: "Tier 2"
+          amount: 6000
+          currency: GBP
+          period: per-project
+          notes_zh: "Tier 1 全部内容，加生化/血液学检测与蛋白质组数据（限期列于 Tier 1）、其他平台检测、实测与填补基因型等。官网费用页在 Tier 3 条目下注明影像数据“currently available under Tier 2 fees for a limited period”，即当前影像数据限期按 Tier 2 费率收取；因此影像申请的实际应付档位可能与名义 Tier 3 不同，须向 Access 团队确认。"
+        - name: "Tier 3"
+          amount: 9000
+          currency: GBP
+          period: per-project
+          notes_zh: "Tier 2 全部内容，加影像数据、其他大规模检测数据、全基因组测序与全外显子测序数据。名义上影像属于此档。"
+        - name: "学生 / 低收入国家（减免档）"
+          amount: 500
+          currency: GBP
+          period: per-project
+          notes_zh: "费用页列为“Lower income countries and student researchers £500 for the first 3 years (£175 per year extension)”；Financial support 页明确为 £500（+VAT，如适用）的 data-only（仅数据、不含样本）请求，须由学生本人或其导师提交、仅用于该学生单个研究项目、成果须由学生署名，且学生与导师均须列入申请。低收入国家机构另有 Global Researcher Access Fund 可 100% 覆盖申请费用（由 AstraZeneca、BMS、GSK、J&J、Regeneron 资助）。"
+        - name: "额外参与机构"
+          amount: 1000
+          currency: GBP
+          period: per-project
+          notes_zh: "申请中每增加一所机构，前 3 年加收 £1,000（延期 £500/年）。"
+        - name: "Tier 1 延期"
+          amount: 1000
+          currency: GBP
+          period: per-year
+          notes_zh: "前 3 年之后的年度延期费；延期须在 AMS 中申请并获 UK Biobank 同意。"
+        - name: "Tier 2 延期"
+          amount: 2000
+          currency: GBP
+          period: per-year
+          notes_zh: "同上。"
+        - name: "Tier 3 延期"
+          amount: 3000
+          currency: GBP
+          period: per-year
+          notes_zh: "同上。"
+        - name: "减免档延期"
+          amount: 175
+          currency: GBP
+          period: per-year
+          notes_zh: "学生 / 低收入国家档位的年度延期费。"
+      compute_costs_zh: "除访问费外，UKB-RAP 上的分析另需付费：按所选虚拟机类型计费的计算资源、研究者自行上传数据的存储、以及数据出云(egress)流量；已配发到项目的 UK Biobank 数据存储不收费（由 AWS 支持）。新加入 UKB-RAP 的研究者获 DNAnexus 提供的 £40 抵免额（官网称约可支持 100 小时分析），之后需设置计费账户。官网费用页仍写有“新项目可获 £1,000 抵免额（until Summer 2026）”，该标注期限在本次核实日（2026-11-14）之前已过，是否延续未见官方说明，故不列为确定金额。另有 Platform Credits Programme（AWS 资助，起步 £1,000、可申请追加，面向早期职业研究者与符合条件低收入国家机构）。官网提供成本计算器：https://www.ukbiobank.ac.uk/use-our-data/cost-calculator/ 。付款须以英镑(GBP)一次性支付，可由申请机构或 MTA 上的 Applicant PI 通过 AMS 在线支付或 BACS 转账。"
+      source_refs:
+        - ukb-fees
+        - ukb-financial-support
+        - ukb-rap
+        - ukb-community-costs
+      as_of: "2026-11-14"
+    delivery:
+      local_download: "no"
+      cloud_platform: "UK Biobank Research Analysis Platform (UKB-RAP)，基于 DNAnexus、由 AWS 提供算力；数据仅在此受限云环境中配发与分析"
+      methods:
+        - cloud-workspace
+        - web
+        - api
+    process:
+      steps:
+        - order: 1
+          title_zh: "在 AMS 注册"
+          detail_zh: "用本人机构邮箱在 https://ams.ukbiobank.ac.uk/ams/signup 注册（免费，官方目标 10 个工作日内审核；不得替他人注册）。注意：截至 2026-11-14 新申请处于暂停状态，官网 Apply for access 页写明因 UKB-RAP 必要变更而暂停、计划 2026 年末重新接受新申请，提交前须先核对该页与 Community 公告；AMS 现已强制多因素认证(MFA)。"
+        - order: 2
+          title_zh: "填写并提交申请"
+          detail_zh: "登录 AMS 完成申请表：项目标题（200 字符内）、通俗摘要（4000 字符内）、最多 6 个关键词、确认研究为健康相关且符合公共利益、是否可能具争议性、利益冲突声明、选择数据档位（Tier 1/2/3 或学生档），并说明将产生的新数据/衍生变量与预期研究产出。"
+        - order: 3
+          title_zh: "添加合作者"
+          detail_zh: "列出所有将直接访问 UK Biobank 数据的研究者（已注册获批者可直接加入，新成员需先完成注册）；仅参与但不接触数据者（如共同作者）无需列入。"
+        - order: 4
+          title_zh: "提供机构授权签字人（MTA contact）"
+          detail_zh: "为每个参与机构填写有权代表机构签署具有法律约束力文件的 MTA 联系人，且不得为该机构的 PI 或 Lead Collaborator；须使用机构专属邮箱，不接受公共域名邮箱；各机构均须签署 MTA。"
+        - order: 5
+          title_zh: "申请审核"
+          detail_zh: "Access Management Team 在提交后 10 个工作日内将申请转交流行病学专家审核，并可能通过 AMS 要求补充信息或反馈；有疑虑的申请转交 Access Committee（可咨询 Ethics Advisory Committee 与 Participant Advisory Group）。被拒后可在 3 个月内书面申请复议，由 Access Committee 在其下一次季度会议审议。"
+        - order: 6
+          title_zh: "缴费并签署 MTA"
+          detail_zh: "获批后 UK Biobank 通过 AMS 发出访问费缴费请求，并仅通过 DocuSign 发送 MTA（只接受 DocuSign 签署，且 MTA 不可协商修改）。MTA 由机构授权签字人签署、Applicant PI 以“read and understood”方式签署，最后由 UK Biobank 授权签字人执行后生效；费用须以 GBP 一次性支付。"
+        - order: 7
+          title_zh: "完成强制培训并在 UKB-RAP 上获得数据"
+          detail_zh: "所有访问者须完成 4 项强制培训模块并通过测验；缴费完成且 MTA 生效后，Researcher Enablement Team 通过 AMS 通知 PI 数据已在 UKB-RAP 上可用。当前分阶段重开期间还须由机构 Org Admin 把研究者重新加入项目，且初期无法重新配发/刷新数据。"
+      official_timeline:
+        value: 15
+        unit: weeks
+        start_point_zh: "在 AMS 提交申请"
+        end_point_zh: "数据在 UKB-RAP 上发布可用（前提是申请获批、费用付清且 MTA 已签署生效）"
+        as_of: "2026-11-14"
+        source_refs:
+          - ukb-community-faq
+      validity:
+        duration_zh: "数据/样本使用初始授予 36 个月（3 年），使用期限以项目周期为准；项目结束须按 MTA 删除数据。"
+        renewal_zh: "可在 AMS 提出合理延期申请，由 UK Biobank 审议，延期需收费：Tier 1 £1,000/年、Tier 2 £2,000/年、Tier 3 £3,000/年，学生/低收入国家档 £175/年；额外机构延期 £500/年。另可通过 Requests 页申请升至更高数据档位，需补差价。"
+      source_refs:
+        - ukb-community-apply
+        - ukb-community-faq
+        - ukb-community-training
+        - ukb-community-changes
+        - ukb-mta
+        - ukb-apply-for-access
+    restrictions_zh:
+      - "个体层面数据只能在 UKB-RAP 云端访问与分析，不得下载到本地；官方影像研讨 Q&A 说明仅可下载自行推导的汇总结果（如图表）。2026-11-10 的官方变更说明进一步指出：重开初期连结果文件也不能下载，计划 2026 年内试行小范围人工输出检查(Output Checking System)、2027 年提供自动化输出检查；初期也无法重新配发或刷新数据。"
+      - "禁止尝试识别参与者、禁止向非项目合作者共享数据；项目结束（或按法律协议要求）须删除已下载数据。UKB 正在对代码仓库中残留去标识数据的行为施加处罚。"
+      - "数据集只能用于已获批准的研究；追加研究可能需另行申请。获批研究者须提交年度报告、在论文发表前至少 2 周告知 UKB 并提供副本、在致谢中写明“This research has been conducted using the UK Biobank Resource under Application Number xxxxx”，并向 UKB 返回结果数据（最终分析数据集及派生字段的统计方法与工具）。"
+      - "原始 T1/T2 DICOM 受限：标准 NIFTI 的 T1 与 T2 序列已去面部，仅在有正当科学理由说明为何不能使用去面部图像时，才可向 Access 团队另行申请。"
+      - "用于教学/培训须单独提交新的数据申请（不能作为现有项目的范围扩展），且须产生公开可得的健康相关研究成果；无公开研究产出或与健康无关的培训用途不允许。数据仍只能在 UKB-RAP 内访问，所有学生须为获批注册者并列入项目，人数多或跨机构时可能加收费用。"
+      - "2025 年 1 月起不再批准保险公司为研究目的直接访问去标识数据的申请；商业机构中的其他申请人仍可申请，但须通过与学界相同的背景审查。"
+      - "2026-11-10 官方说明：WGS/WES 的 CRAM 文件暂时不向任何项目提供；限制级住宅地理位置字段永久移除。"
+    china_notes_zh: "在所核实的官方页面（ukbiobank.ac.uk 与 community.ukbiobank.ac.uk）中，未见针对中国机构或中国境内数据出境、人类遗传资源(HGR)合规的专门规定或说明；官网明确接受全球申请、不要求申请人身处英国，并展示了中国复旦大学研究者使用 UKB 脑影像等数据开展阿尔茨海默病研究的案例。对中国机构的实际要点（均为官方已说明的一般规则）：须以机构邮箱在 AMS 注册、机构须为获认可的研究组织且所在国家不受英国/美国/欧盟制裁；机构须由非 PI 的授权签字人通过 DocuSign 签署 MTA；费用须以 GBP 支付；数据不下发到本地、仅在 UKB-RAP 云端分析，官网说明个体层面数据不得下载，可导出的仅为经输出检查的汇总结果。官方未就中国境内的数据出境或人类遗传资源管理要求作出说明，此处不作推测，具体合规问题请直接咨询本机构与 UK Biobank Access 团队。"
+status: paused
+status_note_zh: "截至 2026-11-14，官网 Apply for access 页明确写明：因 UKB-RAP 需要进行必要变更，新申请目前暂停，优先恢复合规在研项目研究者的访问，并“intend to accept new applications in late 2026”；UKB-RAP 页面亦标注平台“currently closed”。社区 2026-11-10 更新的说明：平台正在分阶段重开，仍需等待英国健康数据提供方与政府批准，并须完成外部安全审查、强制培训与已结题项目的数据删除核验；初期不允许下载任何文件（含结果），计划 2026 年试行人工输出检查、2027 年提供自动化输出检查。因此本文件记录的 15 周官方时长、费用档位与申请步骤均为常规流程数值，当前无法提交新申请，实际恢复时间以官网与 Community 公告为准。"
+sources:
+  - id: ukb-fees
+    title: "Fees - UK Biobank"
+    url: "https://www.ukbiobank.ac.uk/use-our-data/fees/"
+    accessed: "2026-11-14"
+  - id: ukb-financial-support
+    title: "Financial support - UK Biobank"
+    url: "https://www.ukbiobank.ac.uk/use-our-data/fees/financial-support/"
+    accessed: "2026-11-14"
+  - id: ukb-apply-for-access
+    title: "Apply for access - UK Biobank"
+    url: "https://www.ukbiobank.ac.uk/use-our-data/apply-for-access/"
+    accessed: "2026-11-14"
+  - id: ukb-eligibility
+    title: "Eligibility - UK Biobank"
+    url: "https://www.ukbiobank.ac.uk/use-our-data/eligibility/"
+    accessed: "2026-11-14"
+  - id: ukb-access-to-data
+    title: "Access to UK Biobank data - UK Biobank"
+    url: "https://www.ukbiobank.ac.uk/about-us/how-we-work/access-to-uk-biobank-data/"
+    accessed: "2026-11-14"
+  - id: ukb-rap
+    title: "Research Analysis Platform - UK Biobank"
+    url: "https://www.ukbiobank.ac.uk/use-our-data/research-analysis-platform/"
+    accessed: "2026-11-14"
+  - id: ukb-imaging-data-types
+    title: "Imaging data - UK Biobank"
+    url: "https://www.ukbiobank.ac.uk/about-our-data/types-of-data/imaging-data/"
+    accessed: "2026-11-14"
+  - id: ukb-genetic-data-types
+    title: "Genetic data - UK Biobank"
+    url: "https://www.ukbiobank.ac.uk/about-our-data/types-of-data/genetic-data/"
+    accessed: "2026-11-14"
+  - id: ukb-types-of-data
+    title: "Types of data - UK Biobank"
+    url: "https://www.ukbiobank.ac.uk/about-our-data/types-of-data/"
+    accessed: "2026-11-14"
+  - id: ukb-imaging-project
+    title: "The imaging project - UK Biobank"
+    url: "https://www.ukbiobank.ac.uk/taking-part/participant-opportunities/imaging-project/"
+    accessed: "2026-11-14"
+  - id: ukb-global-use
+    title: "Global use of our data - UK Biobank"
+    url: "https://www.ukbiobank.ac.uk/about-our-data/global-use-of-our-data/"
+    accessed: "2026-11-14"
+  - id: ukb-cohort-paper
+    title: "Comparison of Sociodemographic and Health-Related Characteristics of UK Biobank Participants With Those of the General Population - UK Biobank"
+    url: "https://www.ukbiobank.ac.uk/publications/comparison-of-sociodemographic-and-health-related-characteristics-of-uk-biobank-participants-with-those-of-the-general-population/"
+    accessed: "2026-11-14"
+  - id: ukb-data-release-v20
+    title: "Metabolomic, genetic, imaging data and more: new and updated UK Biobank data now available - UK Biobank (20 November 2025)"
+    url: "https://www.ukbiobank.ac.uk/news/metabolomic-genetic-imaging-data-and-more-new-uk-biobank-data-now-available/"
+    accessed: "2026-11-14"
+  - id: ukb-mta
+    title: "Material Transfer Agreement - UK Biobank"
+    url: "https://www.ukbiobank.ac.uk/material-transfer-agreement/"
+    accessed: "2026-11-14"
+  - id: ukb-community-apply
+    title: "How do I apply to access UK Biobank data? - UK Biobank Community"
+    url: "https://community.ukbiobank.ac.uk/hc/en-gb/articles/15453619166749-How-do-I-apply-to-access-UK-Biobank-data"
+    accessed: "2026-11-14"
+  - id: ukb-community-faq
+    title: "Applying to UK Biobank and accessing data - FAQ - UK Biobank Community"
+    url: "https://community.ukbiobank.ac.uk/hc/en-gb/articles/28002689502237-Applying-to-UK-Biobank-and-accessing-data-FAQ"
+    accessed: "2026-11-14"
+  - id: ukb-community-imaging
+    title: "Imaging Data - UK Biobank Community"
+    url: "https://community.ukbiobank.ac.uk/hc/en-gb/articles/24618819821981-Imaging-Data"
+    accessed: "2026-11-14"
+  - id: ukb-community-imaging-study
+    title: "The UK Biobank imaging study - UK Biobank Community"
+    url: "https://community.ukbiobank.ac.uk/hc/en-gb/articles/15467793535261-The-UK-Biobank-imaging-study"
+    accessed: "2026-11-14"
+  - id: ukb-community-training
+    title: "Researcher training courses - UK Biobank Community"
+    url: "https://community.ukbiobank.ac.uk/hc/en-gb/articles/22145292393757-Researcher-training-courses"
+    accessed: "2026-11-14"
+  - id: ukb-community-changes
+    title: "What's changed on the UKB-RAP: a guide for researchers - UK Biobank Community (last updated 10 November 2026)"
+    url: "https://community.ukbiobank.ac.uk/hc/en-gb/articles/39848050722333-What-s-changed-on-UKB-RAP-a-guide-for-researchers"
+    accessed: "2026-11-14"
+  - id: ukb-community-reopen
+    title: "When will the UKB-RAP re-open? - UK Biobank Community"
+    url: "https://community.ukbiobank.ac.uk/hc/en-gb/articles/37284428443933-When-will-the-UKB-RAP-re-open"
+    accessed: "2026-11-14"
+  - id: ukb-community-reopen-letter
+    title: "Final steps towards re-opening the UKB-RAP - UK Biobank Community"
+    url: "https://community.ukbiobank.ac.uk/hc/en-gb/community/posts/40101617532573-Final-steps-towards-re-opening-the-UKB-RAP"
+    accessed: "2026-11-14"
+  - id: ukb-community-symposium
+    title: "UK Biobank Imaging Data Symposium: summary, resources, and Q&A - UK Biobank Community"
+    url: "https://community.ukbiobank.ac.uk/hc/en-gb/articles/31970445186589-UK-Biobank-Imaging-Data-Symposium-summary-resources-and-Q-A"
+    accessed: "2026-11-14"
+  - id: ukb-community-publications
+    title: "Submitting publications and use of UK Biobank images - UK Biobank Community"
+    url: "https://community.ukbiobank.ac.uk/hc/en-gb/articles/16594178325277-Submitting-publications-and-use-of-UK-Biobank-images"
+    accessed: "2026-11-14"
+  - id: ukb-community-costs
+    title: "How much does it cost to access UK Biobank data? - UK Biobank Community"
+    url: "https://community.ukbiobank.ac.uk/hc/en-gb/articles/15010425851933-How-much-does-it-cost-to-access-UK-Biobank-data"
+    accessed: "2026-11-14"
+  - id: ukb-community-training-use
+    title: "Can UK Biobank data be used for training purposes? - UK Biobank Community"
+    url: "https://community.ukbiobank.ac.uk/hc/en-gb/articles/29272115168157-Can-UK-Biobank-data-be-used-for-training-purposes"
+    accessed: "2026-11-14"
+  - id: ukb-imaging-enhancement-paper
+    title: "The UK Biobank imaging enhancement of 100,000 participants: rationale, data collection, management and future directions (Nature Communications, 2020)"
+    url: "https://www.nature.com/articles/s41467-020-15948-9"
+    accessed: "2026-11-14"
+verification:
+  last_verified: "2026-11-14"
+  verified_by: "claude-subagent"
+  review_due: "2027-02-14"
+  method: official-docs
